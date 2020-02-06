@@ -10,15 +10,15 @@
         <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
 
         <!-- Css Styles -->
-        <link rel="stylesheet" href="{{ asset('store/css/bootstrap.min.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('store/css/font-awesome.min.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('store/css/themify-icons.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('store/css/elegant-icons.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('store/css/owl.carousel.min.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('store/css/nice-select.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('store/css/jquery-ui.min.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('store/css/slicknav.min.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('store/css/style.css') }}" type="text/css">
+        <link rel="stylesheet" href="store/css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="store/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="store/css/themify-icons.css" type="text/css">
+        <link rel="stylesheet" href="store/css/elegant-icons.css" type="text/css">
+        <link rel="stylesheet" href="store/css/owl.carousel.min.css" type="text/css">
+        <link rel="stylesheet" href="store/css/nice-select.css" type="text/css">
+        <link rel="stylesheet" href="store/css/jquery-ui.min.css" type="text/css">
+        <link rel="stylesheet" href="store/css/slicknav.min.css" type="text/css">
+        <link rel="stylesheet" href="store/css/style.css" type="text/css">
 
     </head>
     <body style="font-family: 'Kanit', sans-serif;">
@@ -33,7 +33,7 @@
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
                         <a href="./index.html">
-                            <img src="{{ asset('store/img/logo.png') }}" alt="">
+                            <img src="store/img/logo.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="si-pic" style="width:25%">
-                                                    <img src="{{ asset('store/img/food/06.jpg') }}" alt="">
+                                                    <img src="store/img/food/06.jpg" alt="">
                                                 </td>
                                                 <td class="si-text">
                                                     <div class="product-selected">
@@ -65,7 +65,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="si-pic" style="width:25%">
-                                                    <img src="{{ asset('store/img/food/07.jpg') }}" alt="">
+                                                    <img src="store/img/food/07.jpg" alt="">
                                                 </td>
                                                 <td class="si-text">
                                                     <div class="product-selected">
@@ -141,7 +141,7 @@
     <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="hero-items owl-carousel">
-            <div class="single-hero-items set-bg" data-setbg="{{ asset('store/img/food/04.jpg') }}">
+            <div class="single-hero-items set-bg" data-setbg="store/img/food/04.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
@@ -156,7 +156,7 @@
                     </div> --}}
                 </div>
             </div>
-            <div class="single-hero-items set-bg" data-setbg="{{ asset('store/img/food/01.jpg') }}">
+            <div class="single-hero-items set-bg" data-setbg="store/img/food/01.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
@@ -180,7 +180,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="product-large set-bg" data-setbg="{{ asset('store/img/food/05.jpg') }}">
+                    <div class="product-large set-bg" data-setbg="store/img/food/05.jpg">
                         <h2>ซาลาเปา</h2>
                         <a href="#">หลากหลายไส้ให้คุณเลือก</a>
                     </div>
@@ -189,7 +189,7 @@
                     <div class="product-slider owl-carousel">
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="{{ asset('store/img/food/07.jpg') }}" alt="">
+                                <img src="store/img/food/07.jpg" alt="">
                                 <div class="sale">Sale</div>
                                 <div class="icon">
                                     <i class="icon_plus_alt"></i>
@@ -211,7 +211,7 @@
                         </div>
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="{{ asset('store/img/food/06.jpg') }}" alt="">
+                                <img src="store/img/food/06.jpg" alt="">
                                 <div class="icon">
                                     <i class="icon_plus_alt"></i>
                                 </div>
@@ -231,7 +231,7 @@
                         </div>
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="{{ asset('store/img/food/08.jpg') }}" alt="">
+                                <img src="store/img/food/08.jpg" alt="">
                                 <div class="icon">
                                     <i class="icon_plus_alt"></i>
                                 </div>
@@ -264,7 +264,7 @@
                 <div class="col-lg-6">
                     <div class="footer-left">
                         <div class="footer-logo">
-                            <a href="#"><img src="{{ asset('store/img/footer-logo.png') }}" alt=""></a>
+                            <a href="#"><img src="store/img/footer-logo.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
@@ -295,18 +295,18 @@
     </footer>
     <!-- Footer Section End -->
 
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="js/app.js"></script>
 
         <!-- Js Plugins -->
-    <script src="{{ asset('store/js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('store/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('store/js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('store/js/jquery.countdown.min.js') }}"></script>
-    <script src="{{ asset('store/js/jquery.nice-select.min.js') }}"></script>
-    <script src="{{ asset('store/js/jquery.zoom.min.js') }}"></script>
-    <script src="{{ asset('store/js/jquery.dd.min.js') }}"></script>
-    <script src="{{ asset('store/js/jquery.slicknav.js') }}"></script>
-    <script src="{{ asset('store/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('store/js/main.js') }}"></script>
+    <script src="store/js/jquery-3.3.1.min.js"></script>
+    <script src="store/js/bootstrap.min.js"></script>
+    <script src="store/js/jquery-ui.min.js"></script>
+    <script src="store/js/jquery.countdown.min.js"></script>
+    <script src="store/js/jquery.nice-select.min.js"></script>
+    <script src="store/js/jquery.zoom.min.js"></script>
+    <script src="store/js/jquery.dd.min.js"></script>
+    <script src="store/js/jquery.slicknav.js"></script>
+    <script src="store/js/owl.carousel.min.js"></script>
+    <script src="store/js/main.js"></script>
     </body>
 </html>
