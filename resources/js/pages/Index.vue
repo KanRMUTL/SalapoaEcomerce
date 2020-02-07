@@ -12,6 +12,8 @@ import Header from "../components/layouts/Header";
 import Footer from "../components/layouts/Footer";
 import Banner from "../components/index/Banner";
 import ProductList from "../components/index/ProductList";
+import { mapActions } from "vuex";
+
 export default {
   components: {
     Header,
