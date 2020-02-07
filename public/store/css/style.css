@@ -528,7 +528,7 @@ ol {
 .inner-header .nav-right li.cart-icon:hover .cart-hover {
 	opacity: 1;
 	visibility: visible;
-	top: 60px;
+	top: 30px;
 }
 
 .inner-header .nav-right li.cart-icon a {
@@ -4157,7 +4157,7 @@ ol {
 		color: #fff;
 	}
 	.inner-header .nav-right li.cart-icon .cart-hover {
-		left: -50px;
+		left: -10px;
 	}
 	.product-show-option p {
 		text-align: left;
@@ -4242,8 +4242,8 @@ ol {
 		max-width: 100%;
 	}
 	.inner-header .nav-right li.cart-icon .cart-hover {
-		width: 270px;
-		padding: 20px;
+		width: 300px;
+		padding: 10px;
 	}
 	.countdown-timer .cd-item {
 		margin-right: 5px;
