@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSubOrderTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('sub_order', function (Blueprint $table) {
@@ -23,11 +19,6 @@ class CreateSubOrderTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('sub_order');
