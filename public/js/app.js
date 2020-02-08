@@ -2018,9 +2018,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  methods: {
-    addProductToCart: function addProductToCart(product) {}
-  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['addProductToCart'])),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['products']))
 });
 
@@ -2035,6 +2033,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2068,21 +2073,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['cart', 'total']))
+});
 
 /***/ }),
 
@@ -38493,18 +38487,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "women-banner spad pt-4 pb-4" }, [
-    _c("div", { staticClass: "container-fluid" }, [
-      _c("div", { staticClass: "row" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "col-lg-8 offset-lg-1 pt-5",
-            attrs: { id: "products" }
-          },
-          [
+  return _c(
+    "section",
+    { staticClass: "women-banner spad pt-4 pb-4", attrs: { id: "products" } },
+    [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-8 offset-lg-1 pt-5" }, [
             _c(
               "div",
               { staticClass: "product-slider owl-carousel" },
@@ -38570,11 +38561,11 @@ var render = function() {
               }),
               0
             )
-          ]
-        )
+          ])
+        ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -38626,90 +38617,83 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "cart-hover" }, [
+    _c("div", { staticClass: "select-items" }, [
+      _c("table", [
+        _c(
+          "tbody",
+          _vm._l(_vm.cart, function(cartItem, key) {
+            return _c("tr", { key: key }, [
+              _c(
+                "td",
+                { staticClass: "si-pic", staticStyle: { width: "25%" } },
+                [
+                  _c("img", {
+                    attrs: { src: "store/img/products/" + cartItem.product_img }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("td", { staticClass: "si-text" }, [
+                _c("div", { staticClass: "product-selected" }, [
+                  _c("p", [
+                    _vm._v(
+                      "฿" +
+                        _vm._s(cartItem.product_price) +
+                        " x " +
+                        _vm._s(cartItem.sub_order_amount)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h6", [_vm._v("ซาลาเปา" + _vm._s(cartItem.product_name))])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(0, true)
+            ])
+          }),
+          0
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "select-total" }, [
+      _c("span", [_vm._v("รวม:")]),
+      _vm._v(" "),
+      _c("h5", [_vm._v("฿" + _vm._s(_vm.total))])
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cart-hover" }, [
-      _c("div", { staticClass: "select-items" }, [
-        _c("table", [
-          _c("tbody", [
-            _c("tr", [
-              _c(
-                "td",
-                { staticClass: "si-pic", staticStyle: { width: "25%" } },
-                [
-                  _c("img", {
-                    attrs: { src: "store/img/food/06.jpg", alt: "" }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c("td", { staticClass: "si-text" }, [
-                _c("div", { staticClass: "product-selected" }, [
-                  _c("p", [_vm._v("฿13.00 x 1")]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v("ซาลาเปา ไส้ที่ 2")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "si-close" }, [
-                _c("i", { staticClass: "ti-close" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c(
-                "td",
-                { staticClass: "si-pic", staticStyle: { width: "25%" } },
-                [
-                  _c("img", {
-                    attrs: { src: "store/img/food/07.jpg", alt: "" }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c("td", { staticClass: "si-text" }, [
-                _c("div", { staticClass: "product-selected" }, [
-                  _c("p", [_vm._v("฿14.00 x 2")]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v("ซาลาเปา ไส้ที่ 1")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "si-close" }, [
-                _c("i", { staticClass: "ti-close" })
-              ])
-            ])
-          ])
-        ])
-      ]),
+    return _c("td", { staticClass: "si-close" }, [
+      _c("i", { staticClass: "ti-close" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "select-button" }, [
+      _c(
+        "a",
+        { staticClass: "primary-btn view-card", attrs: { href: "/cart" } },
+        [_vm._v("ไปที่ตะกร้า")]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "select-total" }, [
-        _c("span", [_vm._v("รวม:")]),
-        _vm._v(" "),
-        _c("h5", [_vm._v("฿41.00")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "select-button" }, [
-        _c(
-          "a",
-          { staticClass: "primary-btn view-card", attrs: { href: "/cart" } },
-          [_vm._v("ไปที่ตะกร้า")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "primary-btn checkout-btn",
-            attrs: { href: "/checkout" }
-          },
-          [_vm._v("ชำระเงิน")]
-        )
-      ])
+      _c(
+        "a",
+        {
+          staticClass: "primary-btn checkout-btn",
+          attrs: { href: "/checkout" }
+        },
+        [_vm._v("ชำระเงิน")]
+      )
     ])
   }
 ]
@@ -52846,11 +52830,54 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: {
-    cart: [],
-    total: []
+    cart: JSON.parse(localStorage.getItem('cart')),
+    total: Number(localStorage.getItem('total'))
   },
-  mutations: {},
-  actions: {}
+  getters: {
+    cart: function cart(state) {
+      return state.cart;
+    },
+    total: function total(state) {
+      return state.total;
+    }
+  },
+  mutations: {
+    ADD_PRODUCT_TO_CART: function ADD_PRODUCT_TO_CART(state, product) {
+      var filter = state.cart.filter(function (item) {
+        return item.product_id == product.product_id;
+      });
+      console.log(filter);
+
+      if (filter.length > 0) {
+        console.log('มีอยู่แล้ว');
+        var index = state.cart.findIndex(function (cartItem) {
+          return cartItem.product_id == product.product_id;
+        });
+        state.cart[index].sub_order_amount++;
+        state.cart[index].sub_order_total = product.product_price * state.cart[index].sub_order_amount;
+      } else {
+        console.log('ยังไม่มี');
+        state.cart.push({
+          product_id: product.product_id,
+          product_name: product.product_name,
+          product_img: product.product_img,
+          product_price: product.product_price,
+          sub_order_amount: 1,
+          sub_order_total: product.product_price
+        });
+      }
+
+      state.total += Number(product.product_price);
+      localStorage.setItem('cart', JSON.stringify(state.cart));
+      localStorage.setItem('total', state.total);
+    }
+  },
+  actions: {
+    addProductToCart: function addProductToCart(_ref, product) {
+      var commit = _ref.commit;
+      commit("ADD_PRODUCT_TO_CART", product);
+    }
+  }
 });
 
 /***/ }),

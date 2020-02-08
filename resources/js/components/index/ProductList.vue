@@ -1,5 +1,5 @@
 <template>
-  <section class="women-banner spad pt-4 pb-4">
+  <section class="women-banner spad pt-4 pb-4" id="products">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-3">
@@ -8,7 +8,7 @@
             <a href="#">หลากหลายไส้ให้คุณเลือก</a>
           </div>
         </div>
-        <div class="col-lg-8 offset-lg-1 pt-5" id="products">
+        <div class="col-lg-8 offset-lg-1 pt-5" >
           <div class="product-slider owl-carousel">
             <div v-for="(product, key) in products" :key="key" v-show="products" class="product-item">
               <div class="pi-pic">
@@ -38,12 +38,11 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+
 export default {
     methods: {
-        addProductToCart(product) {
-            
-        }
+        ...mapActions(['addProductToCart'])
     },
   computed: {
       ...mapGetters(['products'])

@@ -3,28 +3,14 @@
     <div class="select-items">
       <table>
         <tbody>
-          <tr>
+          <tr v-for="(cartItem, key) in cart" :key="key">
             <td class="si-pic" style="width:25%">
-              <img src="store/img/food/06.jpg" alt />
+              <img :src="`store/img/products/${cartItem.product_img}`" />
             </td>
             <td class="si-text">
               <div class="product-selected">
-                <p>฿13.00 x 1</p>
-                <h6>ซาลาเปา ไส้ที่ 2</h6>
-              </div>
-            </td>
-            <td class="si-close">
-              <i class="ti-close"></i>
-            </td>
-          </tr>
-          <tr>
-            <td class="si-pic" style="width:25%">
-              <img src="store/img/food/07.jpg" alt />
-            </td>
-            <td class="si-text">
-              <div class="product-selected">
-                <p>฿14.00 x 2</p>
-                <h6>ซาลาเปา ไส้ที่ 1</h6>
+                <p>฿{{ cartItem.product_price }} x {{ cartItem.sub_order_amount }}</p>
+                <h6>ซาลาเปา{{ cartItem.product_name }}</h6>
               </div>
             </td>
             <td class="si-close">
@@ -36,7 +22,7 @@
     </div>
     <div class="select-total">
       <span>รวม:</span>
-      <h5>฿41.00</h5>
+      <h5>฿{{ total }}</h5>
     </div>
     <div class="select-button">
       <a href="/cart" class="primary-btn view-card">ไปที่ตะกร้า</a>
@@ -46,7 +32,13 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+      ...mapGetters(['cart', 'total'])
+  }
+};
 </script>
 
 <style>

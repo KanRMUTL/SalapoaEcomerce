@@ -16,6 +16,7 @@ class CreateOrderTable extends Migration
             $table->integer('order_que');
             $table->integer('order_amount');
             $table->decimal('order_total', 8, 2);
+            $table->text('order_remark');
             $table->string('order_slip');
             $table->integer('status_id');
             $table->timestamps();

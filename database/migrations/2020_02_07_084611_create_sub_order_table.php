@@ -13,7 +13,6 @@ class CreateSubOrderTable extends Migration
             $table->increments('sub_order_id');
             $table->integer('sub_order_amount');
             $table->decimal('sub_order_price');
-            $table->text('remark');
             $table->string('product_id');
             $table->timestamps();
         });
