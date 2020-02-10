@@ -1947,7 +1947,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1957,7 +1956,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
-    deleteProduct: 'deleteProductFromCart'
+    deleteProduct: 'deleteProductFromCart',
+    addProductToCart: 'addProductToCart'
   }))
 });
 
@@ -38608,15 +38608,31 @@ var render = function() {
       _vm._v("฿" + _vm._s(_vm.product.product_price))
     ]),
     _vm._v(" "),
-    _c("td", { staticClass: "qua-col" }, [
-      _c("div", { staticClass: "quantity" }, [
-        _c("div", { staticClass: "pro-qty" }, [
-          _c("input", {
-            attrs: { type: "number" },
-            domProps: { value: _vm.product.sub_order_amount }
-          })
-        ])
-      ])
+    _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning text-white mb-1 mr-1",
+          attrs: { type: "button" }
+        },
+        [_vm._v("-")]
+      ),
+      _vm._v(
+        "\n        " + _vm._s(_vm.product.sub_order_amount) + "\n        "
+      ),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning text-white mb-1 ml-1",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.addProductToCart(_vm.product)
+            }
+          }
+        },
+        [_vm._v("+")]
+      )
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "total-price" }, [
@@ -53510,8 +53526,8 @@ __webpack_require__.r(__webpack_exports__);
     deleteProductFromCart: function deleteProductFromCart(_ref2, productId) {
       var commit = _ref2.commit;
       swal({
-        title: "คุณต้องการลบรายการดังกล่าวหรือไม่?",
-        text: "คุณต้องการลบรายการสินค้าดังกล่าวออกจากตะกร้าสินค้าหรือไม่",
+        title: "ยืนยันการลบสินค้า",
+        text: "คุณต้องการลบรายการสินค้าดังกล่าวออกจากตะกร้าหรือไม่?",
         icon: "warning",
         buttons: true,
         dangerMode: true

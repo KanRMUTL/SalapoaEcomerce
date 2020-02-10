@@ -78,18 +78,17 @@ export default {
         }
     },
     actions: {
-        addProductToCart({
-            commit
-        }, product) {
+        addProductToCart({ commit }, product) {
             commit("ADD_PRODUCT_TO_CART", product)
             commit("UPDATE_CART")
+
         },
         deleteProductFromCart({
             commit
         }, productId) {
             swal({
-                    title: "คุณต้องการลบรายการดังกล่าวหรือไม่?",
-                    text: "คุณต้องการลบรายการสินค้าดังกล่าวออกจากตะกร้าสินค้าหรือไม่",
+                    title: "ยืนยันการลบสินค้า",
+                    text: "คุณต้องการลบรายการสินค้าดังกล่าวออกจากตะกร้าหรือไม่?",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

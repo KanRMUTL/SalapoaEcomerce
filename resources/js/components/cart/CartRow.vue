@@ -7,12 +7,11 @@
             <h5>ซาลาเปา{{ product.product_name}}</h5>
         </td>
         <td class="p-price">฿{{ product.product_price}}</td>
-        <td class="qua-col">
-            <div class="quantity">
-                <div class="pro-qty">
-                    <input type="number" :value="product.sub_order_amount" />
-                </div>
-            </div>
+        <td>
+            <button type="button" class="btn btn-warning text-white mb-1 mr-1">-</button>
+            {{product.sub_order_amount}}
+            <button type="button" class="btn btn-warning text-white mb-1 ml-1" @click="addProductToCart(product)">+</button>
+
         </td>
         <td class="total-price">฿{{ product.sub_order_total}}</td>
         <td class="close-td"><i class="ti-close" @click="deleteProduct(product.product_id)"></i></td>
@@ -31,7 +30,8 @@ export default {
     },
     methods: {
         ...mapActions({
-            deleteProduct: 'deleteProductFromCart'
+            deleteProduct: 'deleteProductFromCart',
+            addProductToCart: 'addProductToCart'
         })
     }
 
