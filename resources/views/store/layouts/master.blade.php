@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ร้านซาลาเปา</title>
+    <title>
+        @yield('title')
+    </title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
@@ -28,10 +30,8 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-
-    <div id="app">
-        <index></index>
-    </div>
+    
+    @yield('content')
 
     <script src="{{ mix('js/app.js') }}"></script>
 
