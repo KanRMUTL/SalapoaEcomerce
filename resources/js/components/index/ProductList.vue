@@ -18,7 +18,7 @@
                 </div>
                 <ul>
                   <li class="quick-view">
-                    <a href="#products" v-on:click="addProductToCart(product)">+ เพิ่มในตะกร้า</a>
+                    <a href="#products" @click="addProductToCart(product)">+ เพิ่มในตะกร้า</a>
                   </li>
                 </ul>
               </div>

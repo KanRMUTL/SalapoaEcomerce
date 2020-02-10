@@ -52843,19 +52843,28 @@ __webpack_require__.r(__webpack_exports__);
   },
   mutations: {
     ADD_PRODUCT_TO_CART: function ADD_PRODUCT_TO_CART(state, product) {
-      var filter = state.cart.filter(function (item) {
-        return item.product_id == product.product_id;
-      });
-      console.log(filter);
+      var productInCart;
+      var hasProduct = false;
 
-      if (filter.length > 0) {
-        console.log('มีอยู่แล้ว');
-        var index = state.cart.findIndex(function (cartItem) {
-          return cartItem.product_id == product.product_id;
+      if (state.cart != null) {
+        productInCart = state.cart.filter(function (item) {
+          return item.product_id == product.product_id;
         });
-        state.cart[index].sub_order_amount++;
-        state.cart[index].sub_order_total = product.product_price * state.cart[index].sub_order_amount;
+
+        if (productInCart.length > 0) {
+          hasProduct = true;
+          console.log('มีอยู่แล้ว');
+          var index = state.cart.findIndex(function (cartItem) {
+            return cartItem.product_id == product.product_id;
+          });
+          state.cart[index].sub_order_amount++;
+          state.cart[index].sub_order_total = product.product_price * state.cart[index].sub_order_amount;
+        }
       } else {
+        state.cart = [];
+      }
+
+      if (state.cart == null || !hasProduct) {
         console.log('ยังไม่มี');
         state.cart.push({
           product_id: product.product_id,
@@ -53009,8 +53018,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\salapoa\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\salapoa\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\site\เว็บซาลาเปา\salapoa\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\site\เว็บซาลาเปา\salapoa\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
