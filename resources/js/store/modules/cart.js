@@ -1,7 +1,8 @@
 export default {
     state: {
         cart: JSON.parse(localStorage.getItem('cart')),
-        total: Number(localStorage.getItem('total'))
+        total: Number(localStorage.getItem('total')),
+        amount: Number(localStorage.getItem('amount'))
     },
     getters: {
         cart(state) {
@@ -9,6 +10,9 @@ export default {
         },
         total(state) {
             return state.total
+        },
+        amount(state) {
+            return state.amount
         }
     },
     mutations: {
@@ -27,6 +31,7 @@ export default {
                     let index = state.cart.findIndex(cartItem => cartItem.product_id == product.product_id)
                     state.cart[index].sub_order_amount++
                     state.cart[index].sub_order_total = product.product_price * state.cart[index].sub_order_amount
+                    state.amount = state.cart.length
                 }
             } else {
                 state.cart = []
@@ -42,11 +47,13 @@ export default {
                     sub_order_amount: 1,
                     sub_order_total: product.product_price
                 })
+                state.amount = state.cart.length
             }
 
             state.total += Number(product.product_price)
             localStorage.setItem('cart', JSON.stringify(state.cart))
             localStorage.setItem('total', state.total)
+            localStorage.setItem('amount', state.amount)
         }
     },
     actions: {

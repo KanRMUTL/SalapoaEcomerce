@@ -41,11 +41,11 @@
                             <li class="cart-icon">
                                 <a href="#">
                                     <i class="icon_bag_alt"></i>
-                                    <span>3</span>
+                                    <span v-if="productAmount">{{ productAmount }}</span>
                                 </a>
                                <CartHover />
                             </li>
-                            <li class="cart-price">฿41.00</li>
+                            <li class="cart-price">฿{{ total }}</li>
                         </ul>
                     </div>
                 </div>
@@ -60,10 +60,18 @@
 <script>
 import Menu from '../layouts/Menu'
 import CartHover from '../layouts/CartHover'
+import {mapGetters} from 'vuex'
+
 export default {
     components: {
         Menu,
         CartHover
+    },
+    computed: {
+        ...mapGetters({
+            productAmount: 'amount',
+            total: 'total'
+        })
     }
 }
 </script>

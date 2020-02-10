@@ -2145,6 +2145,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layouts_Menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../layouts/Menu */ "./resources/js/components/layouts/Menu.vue");
 /* harmony import */ var _layouts_CartHover__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layouts/CartHover */ "./resources/js/components/layouts/CartHover.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2204,13 +2211,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Menu: _layouts_Menu__WEBPACK_IMPORTED_MODULE_0__["default"],
     CartHover: _layouts_CartHover__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
+    productAmount: 'amount',
+    total: 'total'
+  }))
 });
 
 /***/ }),
@@ -38836,11 +38848,23 @@ var render = function() {
                   _c(
                     "li",
                     { staticClass: "cart-icon" },
-                    [_vm._m(2), _vm._v(" "), _c("CartHover")],
+                    [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("i", { staticClass: "icon_bag_alt" }),
+                        _vm._v(" "),
+                        _vm.productAmount
+                          ? _c("span", [_vm._v(_vm._s(_vm.productAmount))])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("CartHover")
+                    ],
                     1
                   ),
                   _vm._v(" "),
-                  _c("li", { staticClass: "cart-price" }, [_vm._v("฿41.00")])
+                  _c("li", { staticClass: "cart-price" }, [
+                    _vm._v("฿" + _vm._s(_vm.total))
+                  ])
                 ])
               ]
             )
@@ -38901,16 +38925,6 @@ var staticRenderFns = [
           _c("img", { attrs: { src: "store/img/logo.png", alt: "" } })
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c("i", { staticClass: "icon_bag_alt" }),
-      _vm._v(" "),
-      _c("span", [_vm._v("3")])
     ])
   }
 ]
@@ -52831,7 +52845,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: {
     cart: JSON.parse(localStorage.getItem('cart')),
-    total: Number(localStorage.getItem('total'))
+    total: Number(localStorage.getItem('total')),
+    amount: Number(localStorage.getItem('amount'))
   },
   getters: {
     cart: function cart(state) {
@@ -52839,6 +52854,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     total: function total(state) {
       return state.total;
+    },
+    amount: function amount(state) {
+      return state.amount;
     }
   },
   mutations: {
@@ -52861,6 +52879,7 @@ __webpack_require__.r(__webpack_exports__);
           });
           state.cart[index].sub_order_amount++;
           state.cart[index].sub_order_total = product.product_price * state.cart[index].sub_order_amount;
+          state.amount = state.cart.length;
         }
       } else {
         state.cart = [];
@@ -52876,11 +52895,13 @@ __webpack_require__.r(__webpack_exports__);
           sub_order_amount: 1,
           sub_order_total: product.product_price
         });
+        state.amount = state.cart.length;
       }
 
       state.total += Number(product.product_price);
       localStorage.setItem('cart', JSON.stringify(state.cart));
       localStorage.setItem('total', state.total);
+      localStorage.setItem('amount', state.amount);
     }
   },
   actions: {
