@@ -17,8 +17,8 @@
                   <i class="icon_plus_alt"></i>
                 </div>
                 <ul>
-                  <li class="quick-view">
-                    <a href="#products" v-on:click="addProductToCart(product)">+ เพิ่มในตะกร้า</a>
+                  <li class="quick-view p-3" @click="addProductToCart(product)">
+                    <span>+ เพิ่มในตะกร้า</span>
                   </li>
                 </ul>
               </div>
