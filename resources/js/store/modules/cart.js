@@ -61,6 +61,10 @@ export default {
 
         },
 
+        DECLINE_PRODUCT_FROM_CART(state, productId) {
+
+        },
+
         UPDATE_CART(state) {
             let total = 0
             state.cart.forEach(item => {
@@ -85,7 +89,7 @@ export default {
         }, productId) {
             swal({
                     title: "คุณต้องการลบรายการดังกล่าวหรือไม่?",
-                    text: "คุณต้องการลบรายการสินค้าดังกล่าวออกจากตะกร้าสินค้าของคุณหรือไม่",
+                    text: "คุณต้องการลบรายการสินค้าดังกล่าวออกจากตะกร้าสินค้าหรือไม่",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

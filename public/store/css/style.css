@@ -2666,8 +2666,8 @@ ol {
 }
 
 .cart-table table tr td {
-	text-align: center;
-	padding-bottom: 34px;
+    text-align: center;
+    padding: 2%;
 }
 
 .cart-table table tr td.first-row {
@@ -2675,7 +2675,7 @@ ol {
 }
 
 .cart-table table tr td.cart-pic {
-	width: 21%;
+	width: 15%;
 }
 
 .cart-table table tr td.cart-title {
