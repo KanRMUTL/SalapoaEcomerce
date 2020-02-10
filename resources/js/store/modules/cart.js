@@ -16,9 +16,13 @@ export default {
             let productInCart
             let hasProduct = false
             if (state.cart != null) {
-                productInCart = state.cart.filter(item => item.product_id == product.product_id);
-                if (productInCart.length > 0) {
-                    hasProduct = true
+                productInCart = state.cart.forEach(function (item) {
+                    if(item.product_id == product.product_id) {
+                        hasProduct = true
+                        return
+                    }
+                });
+                if (hasProduct) {
                     console.log('มีอยู่แล้ว')
                     let index = state.cart.findIndex(cartItem => cartItem.product_id == product.product_id)
                     state.cart[index].sub_order_amount++
@@ -28,7 +32,7 @@ export default {
                 state.cart = []
             }
 
-            if(state.cart == null || !hasProduct) {
+            if (state.cart == null || !hasProduct) {
                 console.log('ยังไม่มี')
                 state.cart.push({
                     product_id: product.product_id,

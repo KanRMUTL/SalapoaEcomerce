@@ -52847,12 +52847,14 @@ __webpack_require__.r(__webpack_exports__);
       var hasProduct = false;
 
       if (state.cart != null) {
-        productInCart = state.cart.filter(function (item) {
-          return item.product_id == product.product_id;
+        productInCart = state.cart.forEach(function (item) {
+          if (item.product_id == product.product_id) {
+            hasProduct = true;
+            return;
+          }
         });
 
-        if (productInCart.length > 0) {
-          hasProduct = true;
+        if (hasProduct) {
           console.log('มีอยู่แล้ว');
           var index = state.cart.findIndex(function (cartItem) {
             return cartItem.product_id == product.product_id;
