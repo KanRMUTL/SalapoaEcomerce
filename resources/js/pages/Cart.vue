@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <Header menuSelected="cart"/>
     <CartTable />
     <Footer />
   </div>

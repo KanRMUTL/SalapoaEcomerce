@@ -23,7 +23,7 @@
                                     :product="cartItem"
                                     v-show="cart.length > 0"
                                 />
-                                <tr>
+                                <tr v-if="cart.length <= 0">
                                     <td colspan="6">
                                         ไม่มีสินค้าในตะกร้า
                                     </td>

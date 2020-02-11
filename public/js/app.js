@@ -1946,6 +1946,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1955,10 +1969,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
-    deleteProduct: 'deleteProductFromCart',
-    addProductToCart: 'addProductToCart',
-    declineProduct: 'declineProductFromCart'
-  }))
+    deleteProduct: "deleteProductFromCart",
+    addProductToCart: "addProductToCart",
+    declineProductFromCart: "declineProductFromCart"
+  }), {
+    declineProduct: function declineProduct(productId, productAmount) {
+      if (productAmount == 1) {
+        this.deleteProduct(productId);
+      } else {
+        this.declineProductFromCart(productId);
+      }
+    }
+  })
 });
 
 /***/ }),
@@ -2235,6 +2257,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2271,12 +2300,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['address', 'phone', 'email']))
+});
 
 /***/ }),
 
@@ -2333,34 +2360,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    menuSelected: {
+      type: String,
+      required: true
+    }
+  },
   components: {
     Menu: _layouts_Menu__WEBPACK_IMPORTED_MODULE_0__["default"],
     CartHover: _layouts_CartHover__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -2401,12 +2410,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    menuSelected: {
+      type: String,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      menu: [{
+        title: 'หน้าแรก',
+        path: '/',
+        check: 'home'
+      }, {
+        title: 'เลือกซื้อซาลาเปา',
+        path: '/#',
+        check: 'products'
+      }, {
+        title: 'ตะกร้าสินค้า',
+        path: '/cart',
+        check: 'cart'
+      }, {
+        title: 'ติดต่อเรา',
+        path: '/#',
+        check: 'contact'
+      }]
+    };
+  },
+  methods: {
+    isActive: function isActive(check) {
+      return check == this.menuSelected;
+    }
+  }
+});
 
 /***/ }),
 
@@ -38618,15 +38655,18 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn btn-warning text-white mb-1 mr-1",
+          staticClass: "btn btn-warning btn-sm text-white mb-1 mr-1",
           attrs: { type: "button" },
           on: {
             click: function($event) {
-              return _vm.declineProduct(_vm.product.product_id)
+              return _vm.declineProduct(
+                _vm.product.product_id,
+                _vm.product.sub_order_amount
+              )
             }
           }
         },
-        [_vm._v("-")]
+        [_vm._v("\n            -\n        ")]
       ),
       _vm._v(
         "\n        " + _vm._s(_vm.product.sub_order_amount) + "\n        "
@@ -38634,7 +38674,7 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn btn-warning text-white mb-1 ml-1",
+          staticClass: "btn btn-warning btn-sm text-white mb-1 ml-1",
           attrs: { type: "button" },
           on: {
             click: function($event) {
@@ -38642,7 +38682,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("+")]
+        [_vm._v("\n            +\n        ")]
       )
     ]),
     _vm._v(" "),
@@ -38710,7 +38750,15 @@ var render = function() {
                     })
                   }),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _vm.cart.length <= 0
+                    ? _c("tr", [
+                        _c("td", { attrs: { colspan: "6" } }, [
+                          _vm._v(
+                            "\n                                    ไม่มีสินค้าในตะกร้า\n                                "
+                          )
+                        ])
+                      ])
+                    : _vm._e()
                 ],
                 2
               )
@@ -38763,18 +38811,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("ราคารวม")]),
         _vm._v(" "),
         _c("th", [_c("i", { staticClass: "ti-close" })])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { attrs: { colspan: "6" } }, [
-        _vm._v(
-          "\n                                    ไม่มีสินค้าในตะกร้า\n                                "
-        )
       ])
     ])
   }
@@ -39122,79 +39158,63 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("footer", { staticClass: "footer-section" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-lg-6" }, [
+          _c("div", { staticClass: "footer-left" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("ul", [
+              _c("li", [_vm._v("ที่อยู่: " + _vm._s(_vm.address))]),
+              _vm._v(" "),
+              _c("li", [_vm._v("เบอร์โทร: " + _vm._s(_vm.phone))]),
+              _vm._v(" "),
+              _c("li", [_vm._v("Email: " + _vm._s(_vm.email))])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(1)
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "footer-section" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-6" }, [
-            _c("div", { staticClass: "footer-left" }, [
-              _c("div", { staticClass: "footer-logo" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("img", {
-                    attrs: { src: "store/img/footer-logo.png", alt: "" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("ul", [
-                _c("li", [_vm._v("Address: 60-49 Road 11378 New York")]),
-                _vm._v(" "),
-                _c("li", [_vm._v("Phone: +65 11.188.888")]),
-                _vm._v(" "),
-                _c("li", [_vm._v("Email: hello.colorlib@gmail.com")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "footer-social" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-facebook" })
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-instagram" })
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-twitter" })
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-pinterest" })
-                ])
-              ])
-            ])
+    return _c("div", { staticClass: "footer-logo" }, [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("img", { attrs: { src: "store/img/footer-logo.png", alt: "" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-6" }, [
+      _c("div", { staticClass: "footer-widget" }, [
+        _c("h5", [_vm._v("เมนู")]),
+        _vm._v(" "),
+        _c("ul", [
+          _c("li", { staticClass: "active" }, [
+            _c("a", { attrs: { href: "/" } }, [_vm._v("หน้าแรก")])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6" }, [
-            _c("div", { staticClass: "footer-widget" }, [
-              _c("h5", [_vm._v("เมนู")]),
-              _vm._v(" "),
-              _c("ul", [
-                _c("li", { staticClass: "active" }, [
-                  _c("a", { attrs: { href: "/" } }, [_vm._v("หน้าแรก")])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("เลือกซื้อซาลาเปา")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("ตะกร้าสินค้า")])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("ติดต่อเรา")])
-                ])
-              ])
-            ])
-          ])
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("เลือกซื้อซาลาเปา")])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "/cart" } }, [_vm._v("ตะกร้าสินค้า")])
+          ]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("ติดต่อเรา")])]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("ผู้ดูแลระบบ")])])
         ])
       ])
     ])
@@ -39225,12 +39245,10 @@ var render = function() {
     "header",
     { staticClass: "header-section" },
     [
-      _vm._m(0),
-      _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "inner-header p-0" }, [
           _c("div", { staticClass: "row" }, [
-            _vm._m(1),
+            _vm._m(0),
             _vm._v(" "),
             _c(
               "div",
@@ -39264,49 +39282,12 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("Menu")
+      _c("Menu", { attrs: { menuSelected: _vm.menuSelected } })
     ],
     1
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "header-top" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "ht-left" }, [
-          _c("div", { staticClass: "mail-service" }, [
-            _c("i", { staticClass: " fa fa-envelope" }),
-            _vm._v("\n                    store_xx@gmail.com\n                ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "phone-service" }, [
-            _c("i", { staticClass: " fa fa-phone" }),
-            _vm._v("\n                    084 - xxx xxxx\n                ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "ht-right" }, [
-          _c("a", { staticClass: "login-panel", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "fa fa-user" }),
-            _vm._v("Login")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "top-social" }, [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "ti-facebook" })
-            ]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "ti-instagram" })
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -39341,40 +39322,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "nav-item" }, [
-      _c("div", { staticClass: "container text-center" }, [
-        _c("nav", { staticClass: "nav-menu mobile-menu" }, [
-          _c("ul", [
-            _c("li", { staticClass: "active" }, [
-              _c("a", { attrs: { href: "/" } }, [_vm._v("หน้าแรก")])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "/products" } }, [
-                _vm._v("เลือกซื้อซาลาเปา")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "/cart" } }, [_vm._v("ตะกร้าสินค้า")])
-            ]),
-            _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("ติดต่อเรา")])])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { attrs: { id: "mobile-menu-wrap" } })
-      ])
+  return _c("div", { staticClass: "nav-item" }, [
+    _c("div", { staticClass: "container text-center" }, [
+      _c("nav", { staticClass: "nav-menu mobile-menu" }, [
+        _c(
+          "ul",
+          _vm._l(_vm.menu, function(item, key) {
+            return _c(
+              "li",
+              { key: key, class: { active: _vm.isActive(item.check) } },
+              [
+                _c("a", { attrs: { href: item.path } }, [
+                  _vm._v(_vm._s(item.title))
+                ])
+              ]
+            )
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "mobile-menu-wrap" } })
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39398,7 +39370,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("Header"), _vm._v(" "), _c("CartTable"), _vm._v(" "), _c("Footer")],
+    [
+      _c("Header", { attrs: { menuSelected: "cart" } }),
+      _vm._v(" "),
+      _c("CartTable"),
+      _vm._v(" "),
+      _c("Footer")
+    ],
     1
   )
 }
@@ -39427,7 +39405,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("Header"),
+      _c("Header", { attrs: { menuSelected: "home" } }),
       _vm._v(" "),
       _c("banner"),
       _vm._v(" "),
@@ -53446,14 +53424,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/cart */ "./resources/js/store/modules/cart.js");
 /* harmony import */ var _modules_product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/product */ "./resources/js/store/modules/product.js");
+/* harmony import */ var _modules_config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/config */ "./resources/js/store/modules/config.js");
 
  // Others store
+
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
+    config: _modules_config__WEBPACK_IMPORTED_MODULE_4__["default"],
     cart: _modules_cart__WEBPACK_IMPORTED_MODULE_2__["default"],
     product: _modules_product__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
@@ -53544,35 +53525,15 @@ __webpack_require__.r(__webpack_exports__);
         return cartItem.product_id == productId;
       });
       var amount = state.cart[index].sub_order_amount;
-
-      if (amount == 1) {
-        swal({
-          title: "ยืนยันการลบสินค้า",
-          text: "คุณต้องการลบรายการสินค้าดังกล่าวออกจากตะกร้าหรือไม่?",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true
-        }).then(function (willDelete) {
-          if (willDelete) {
-            var _index = state.cart.findIndex(function (cartItem) {
-              return cartItem.product_id == productId;
-            });
-
-            state.cart.splice(_index, 1);
-            swal("ลบรายการสินค้าดังกล่าวเรียบร้อย", {
-              icon: "success"
-            });
-          }
-        });
-      } else {
-        state.cart[index].sub_order_amount = amount - 1;
-      }
+      state.cart[index].sub_order_amount = amount - 1;
+      state.cart[index].sub_order_total = state.cart[index].sub_order_amount * state.cart[index].product_price;
     },
     UPDATE_CART: function UPDATE_CART(state) {
       var total = 0;
       state.cart.forEach(function (item) {
         total += Number(item.sub_order_total);
       });
+      console.log(total);
       state.total = total;
       state.amount = state.cart.length;
       localStorage.setItem('cart', JSON.stringify(state.cart));
@@ -53597,16 +53558,47 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (willDelete) {
         if (willDelete) {
           commit("DELETE_PRODUCT_FROM_CART", productId);
-          commit("UPDATE_CART");
           swal("ลบรายการสินค้าดังกล่าวเรียบร้อย", {
             icon: "success"
           });
+          commit("UPDATE_CART");
         }
       });
     },
     declineProductFromCart: function declineProductFromCart(_ref3, productId) {
       var commit = _ref3.commit;
       commit('DECLINE_PRODUCT_FROM_CART', productId);
+      commit("UPDATE_CART");
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/config.js":
+/*!**********************************************!*\
+  !*** ./resources/js/store/modules/config.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    address: '101/8 ม.2 ต.ช้างเผือก อ.เมือง จ.เชียงใหม่',
+    phone: '086-4351469',
+    email: 'Bossnoppadol@gmail.com'
+  },
+  getters: {
+    address: function address(state) {
+      return state.address;
+    },
+    phone: function phone(state) {
+      return state.phone;
+    },
+    email: function email(state) {
+      return state.email;
     }
   }
 });
