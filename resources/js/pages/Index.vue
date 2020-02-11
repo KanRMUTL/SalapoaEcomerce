@@ -19,7 +19,7 @@ export default {
     Footer,
     Banner,
     ProductList
-  },
+  }
 };
 </script>
 
