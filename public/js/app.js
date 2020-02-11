@@ -2080,6 +2080,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2117,7 +2124,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['storeNameTh', 'storeNameEng']))
+});
 
 /***/ }),
 
@@ -38839,73 +38851,121 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("section", { staticClass: "hero-section" }, [
+    _c("div", { staticClass: "hero-items owl-carousel" }, [
+      _c(
+        "div",
+        {
+          staticClass: "single-hero-items set-bg",
+          attrs: { "data-setbg": "store/img/food/04.jpg" }
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "col-lg-12 text-center",
+                  staticStyle: {
+                    background: "rgba(255,255,255,0.5)",
+                    padding: "2%",
+                    "border-radius": "10px"
+                  }
+                },
+                [
+                  _c("h1", [_vm._v(_vm._s(_vm.storeNameTh))]),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    { staticClass: "primary-btn", attrs: { href: "#" } },
+                    [_vm._v("ซื้อเลย")]
+                  )
+                ]
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "single-hero-items set-bg",
+          attrs: { "data-setbg": "store/img/food/01.jpg" }
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "col-lg-12 text-center",
+                  staticStyle: {
+                    background: "rgba(255,255,255,0.5)",
+                    padding: "2%",
+                    "border-radius": "10px"
+                  }
+                },
+                [
+                  _c("h1", [_vm._v(_vm._s(_vm.storeNameTh))]),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    { staticClass: "primary-btn", attrs: { href: "#" } },
+                    [_vm._v("ซื้อเลย")]
+                  )
+                ]
+              )
+            ])
+          ])
+        ]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "hero-section" }, [
-      _c("div", { staticClass: "hero-items owl-carousel" }, [
-        _c(
-          "div",
-          {
-            staticClass: "single-hero-items set-bg",
-            attrs: { "data-setbg": "store/img/food/04.jpg" }
-          },
-          [
-            _c("div", { staticClass: "container" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-5" }, [
-                  _c("h1", [_vm._v("ชื่อร้าน XXXXX")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "\n              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\n              incididunt ut labore et dolore\n            "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { staticClass: "primary-btn", attrs: { href: "#" } },
-                    [_vm._v("Shop Now")]
-                  )
-                ])
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "single-hero-items set-bg",
-            attrs: { "data-setbg": "store/img/food/01.jpg" }
-          },
-          [
-            _c("div", { staticClass: "container" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-5" }, [
-                  _c("h1", [_vm._v("ชื่อร้าน XXXXX")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "\n              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\n              incididunt ut labore et dolore\n            "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { staticClass: "primary-btn", attrs: { href: "#" } },
-                    [_vm._v("Shop Now")]
-                  )
-                ])
-              ])
-            ])
-          ]
-        )
-      ])
+    return _c("p", [
+      _vm._v(
+        "\n              คุณสามารถเลือกซื้อซาลาเปาไส้ต่างๆ บนเว็บไซต์ของเราล่วงหน้า"
+      ),
+      _c("br"),
+      _vm._v(
+        "\n              จากนั้นนำบัตรคิวที่ได้จากเว็บไซต์ไปยืนยันกับทางร้านเพื่อรับซาลาเปา "
+      ),
+      _c("br"),
+      _vm._v("\n              👉👉"),
+      _c("b", { staticStyle: { color: "green" } }, [
+        _vm._v("สะดวก, รวดเร็ว, ไม่ต้องยืนรอนาน")
+      ]),
+      _vm._v("👈👈\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _vm._v(
+        "\n              คุณสามารถเลือกซื้อซาลาเปาไส้ต่างๆ บนเว็บไซต์ของเราล่วงหน้า"
+      ),
+      _c("br"),
+      _vm._v(
+        "\n              จากนั้นนำบัตรคิวที่ได้จากเว็บไซต์ไปยืนยันกับทางร้านเพื่อรับซาลาเปา "
+      ),
+      _c("br"),
+      _vm._v("\n              👉👉"),
+      _c("b", { staticStyle: { color: "green" } }, [
+        _vm._v("สะดวก, รวดเร็ว, ไม่ต้องยืนรอนาน")
+      ]),
+      _vm._v("👈👈\n            ")
     ])
   }
 ]
@@ -53591,7 +53651,8 @@ __webpack_require__.r(__webpack_exports__);
   state: {
     address: '101/8 ม.2 ต.ช้างเผือก อ.เมือง จ.เชียงใหม่',
     phone: '086-4351469',
-    email: 'Bossnoppadol@gmail.com'
+    email: 'Bossnoppadol@gmail.com',
+    storeNameTh: 'ซาลาเปาไอที'
   },
   getters: {
     address: function address(state) {
@@ -53602,6 +53663,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     email: function email(state) {
       return state.email;
+    },
+    storeNameTh: function storeNameTh(state) {
+      return state.storeNameTh;
     }
   }
 });
