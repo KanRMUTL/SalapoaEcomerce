@@ -1,4 +1,5 @@
 import swall from 'sweetalert'
+
 export default {
     state: {
         cart: JSON.parse(localStorage.getItem('cart')),
@@ -58,11 +59,31 @@ export default {
         DELETE_PRODUCT_FROM_CART(state, productId) {
             let index = state.cart.findIndex(cartItem => cartItem.product_id == productId)
             state.cart.splice(index, 1)
-
         },
 
         DECLINE_PRODUCT_FROM_CART(state, productId) {
-
+            let index = state.cart.findIndex(cartItem => cartItem.product_id == productId)
+            let amount = state.cart[index].sub_order_amount
+            if(amount == 1){
+                swal({
+                    title: "ยืนยันการลบสินค้า",
+                    text: "คุณต้องการลบรายการสินค้าดังกล่าวออกจากตะกร้าหรือไม่?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        let index = state.cart.findIndex(cartItem => cartItem.product_id == productId)
+                        state.cart.splice(index, 1)
+                        swal("ลบรายการสินค้าดังกล่าวเรียบร้อย", {
+                            icon: "success",
+                        });
+                    }
+                });
+            } else {
+                state.cart[index].sub_order_amount = amount - 1
+            }
         },
 
         UPDATE_CART(state) {
@@ -103,6 +124,9 @@ export default {
                     }
                 });
 
+        },
+        declineProductFromCart({commit}, productId) {
+            commit('DECLINE_PRODUCT_FROM_CART', productId)
         }
     }
 }

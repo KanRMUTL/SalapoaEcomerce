@@ -21,7 +21,13 @@
                                     v-for="(cartItem, key) in cart"
                                     :key="key"
                                     :product="cartItem"
+                                    v-show="cart.length > 0"
                                 />
+                                <tr>
+                                    <td colspan="6">
+                                        ไม่มีสินค้าในตะกร้า
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

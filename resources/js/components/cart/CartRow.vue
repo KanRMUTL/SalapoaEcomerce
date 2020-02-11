@@ -8,10 +8,9 @@
         </td>
         <td class="p-price">฿{{ product.product_price}}</td>
         <td>
-            <button type="button" class="btn btn-warning text-white mb-1 mr-1">-</button>
+            <button type="button" class="btn btn-warning text-white mb-1 mr-1" @click="declineProduct(product.product_id)">-</button>
             {{product.sub_order_amount}}
             <button type="button" class="btn btn-warning text-white mb-1 ml-1" @click="addProductToCart(product)">+</button>
-
         </td>
         <td class="total-price">฿{{ product.sub_order_total}}</td>
         <td class="close-td"><i class="ti-close" @click="deleteProduct(product.product_id)"></i></td>
@@ -31,7 +30,8 @@ export default {
     methods: {
         ...mapActions({
             deleteProduct: 'deleteProductFromCart',
-            addProductToCart: 'addProductToCart'
+            addProductToCart: 'addProductToCart',
+            declineProduct: 'declineProductFromCart'
         })
     }
 

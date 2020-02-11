@@ -1946,7 +1946,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1957,7 +1956,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
     deleteProduct: 'deleteProductFromCart',
-    addProductToCart: 'addProductToCart'
+    addProductToCart: 'addProductToCart',
+    declineProduct: 'declineProductFromCart'
   }))
 });
 
@@ -1980,6 +1980,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -38613,7 +38619,12 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-warning text-white mb-1 mr-1",
-          attrs: { type: "button" }
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.declineProduct(_vm.product.product_id)
+            }
+          }
         },
         [_vm._v("-")]
       ),
@@ -38683,13 +38694,25 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.cart, function(cartItem, key) {
-                  return _c("CartRow", {
-                    key: key,
-                    attrs: { product: cartItem }
-                  })
-                }),
-                1
+                [
+                  _vm._l(_vm.cart, function(cartItem, key) {
+                    return _c("CartRow", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.cart.length > 0,
+                          expression: "cart.length > 0"
+                        }
+                      ],
+                      key: key,
+                      attrs: { product: cartItem }
+                    })
+                  }),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ],
+                2
               )
             ])
           ]),
@@ -38740,6 +38763,18 @@ var staticRenderFns = [
         _c("th", [_vm._v("ราคารวม")]),
         _vm._v(" "),
         _c("th", [_c("i", { staticClass: "ti-close" })])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { attrs: { colspan: "6" } }, [
+        _vm._v(
+          "\n                                    ไม่มีสินค้าในตะกร้า\n                                "
+        )
       ])
     ])
   }
@@ -53504,7 +53539,35 @@ __webpack_require__.r(__webpack_exports__);
       });
       state.cart.splice(index, 1);
     },
-    DECLINE_PRODUCT_FROM_CART: function DECLINE_PRODUCT_FROM_CART(state, productId) {},
+    DECLINE_PRODUCT_FROM_CART: function DECLINE_PRODUCT_FROM_CART(state, productId) {
+      var index = state.cart.findIndex(function (cartItem) {
+        return cartItem.product_id == productId;
+      });
+      var amount = state.cart[index].sub_order_amount;
+
+      if (amount == 1) {
+        swal({
+          title: "ยืนยันการลบสินค้า",
+          text: "คุณต้องการลบรายการสินค้าดังกล่าวออกจากตะกร้าหรือไม่?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true
+        }).then(function (willDelete) {
+          if (willDelete) {
+            var _index = state.cart.findIndex(function (cartItem) {
+              return cartItem.product_id == productId;
+            });
+
+            state.cart.splice(_index, 1);
+            swal("ลบรายการสินค้าดังกล่าวเรียบร้อย", {
+              icon: "success"
+            });
+          }
+        });
+      } else {
+        state.cart[index].sub_order_amount = amount - 1;
+      }
+    },
     UPDATE_CART: function UPDATE_CART(state) {
       var total = 0;
       state.cart.forEach(function (item) {
@@ -53540,6 +53603,10 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
+    },
+    declineProductFromCart: function declineProductFromCart(_ref3, productId) {
+      var commit = _ref3.commit;
+      commit('DECLINE_PRODUCT_FROM_CART', productId);
     }
   }
 });
