@@ -1,6 +1,6 @@
 @extends('store.layouts.master')
 
-@section('title', 'หน้าแรก')
+@section('title', 'ตะกร้าสินค้า')
 
 ิ@section('content')
 
