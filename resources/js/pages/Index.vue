@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <Header menuSelected="home"/>
     <banner />
     <product-list />
     <Footer />
