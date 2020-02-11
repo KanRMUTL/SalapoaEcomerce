@@ -2060,6 +2060,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log(this.cart);
+  },
   components: {
     CartRow: _CartRow__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -38750,11 +38753,11 @@ var render = function() {
                     })
                   }),
                   _vm._v(" "),
-                  _vm.cart.length <= 0
+                  !_vm.cart || _vm.cart.length == 0
                     ? _c("tr", [
                         _c("td", { attrs: { colspan: "6" } }, [
                           _vm._v(
-                            "\n                                    ไม่มีสินค้าในตะกร้า\n                                "
+                            "\n                                    ไม่มีสินค้าในตะกร้าของคุณ\n                                "
                           )
                         ])
                       ])

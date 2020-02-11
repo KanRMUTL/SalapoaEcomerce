@@ -23,9 +23,9 @@
                                     :product="cartItem"
                                     v-show="cart.length > 0"
                                 />
-                                <tr v-if="cart.length <= 0">
+                                <tr v-if="!cart || cart.length == 0">
                                     <td colspan="6">
-                                        ไม่มีสินค้าในตะกร้า
+                                        ไม่มีสินค้าในตะกร้าของคุณ
                                     </td>
                                 </tr>
                             </tbody>
@@ -58,6 +58,9 @@ import CartRow from './CartRow'
 import {mapGetters} from 'vuex'
 
 export default {
+    mounted(){
+        console.log(this.cart)
+    },
     components:{
         CartRow
     },
