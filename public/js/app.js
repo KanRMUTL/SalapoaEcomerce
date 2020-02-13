@@ -2173,10 +2173,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         phone: '084444548855',
         remark: 'None',
         slipFile: ''
-      }
+      },
+      paymented: false
     };
   },
-  methods: {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['pushOrder', 'updateOrder']), {
     handleFileUpload: function handleFileUpload() {
       this.form.slipFile = this.$refs.slip.files[0];
     },
@@ -2192,6 +2193,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return !condition;
+    },
+    switchPaymentStatus: function switchPaymentStatus() {
+      this.paymented = !this.paymented;
     },
     formSubmit: function formSubmit(e) {
       e.preventDefault();
@@ -2215,11 +2219,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (res) {
+        var order_id = res.data.order_id;
+        var order = JSON.parse(localStorage.getItem('order'));
+
+        if (order == null) {
+          order = [];
+        }
+
+        order.push(order_id);
+        localStorage.setItem('order', JSON.stringify(order));
         sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
           title: 'บันทึกการสั่งซื้อของคุณเรียบร้อย',
           icon: 'success'
         });
       })["catch"](function (error) {
+        console.log(error);
         sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
           title: 'เกิดข้อผิดพลาดในการสั่งซื้อ',
           text: 'กรุณาตรวจสอบข้อมูลก่อนยืนยันการสั่งซื้อ',
@@ -2227,8 +2241,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       });
     }
-  },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['cart', 'total', 'amount']))
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['cart', 'total', 'amount', 'order']))
 });
 
 /***/ }),
@@ -39053,210 +39067,220 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "mt-3" }, [
     _c("div", { staticClass: "container" }, [
-      _c(
-        "form",
-        {
-          staticClass: "checkout-form",
-          attrs: { action: "#" },
-          on: { submit: _vm.formSubmit }
-        },
-        [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-6" }, [
-              _c("h4", { staticClass: "mb-2" }, [_vm._v("รายละเอียด")]),
-              _vm._v(" "),
+      !_vm.paymented
+        ? _c(
+            "form",
+            {
+              staticClass: "checkout-form",
+              attrs: { action: "#" },
+              on: { submit: _vm.formSubmit }
+            },
+            [
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-lg-6" }, [
-                  _c("label", { attrs: { for: "fir" } }, [_vm._v("ชื่อ")]),
+                  _c("h4", { staticClass: "mb-2" }, [_vm._v("รายละเอียด")]),
                   _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.firstname,
-                        expression: "form.firstname"
-                      }
-                    ],
-                    attrs: { type: "text", id: "fir" },
-                    domProps: { value: _vm.form.firstname },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-6" }, [
+                      _c("label", { attrs: { for: "fir" } }, [_vm._v("ชื่อ")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.firstname,
+                            expression: "form.firstname"
+                          }
+                        ],
+                        attrs: { type: "text", id: "fir" },
+                        domProps: { value: _vm.form.firstname },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "firstname", $event.target.value)
+                          }
                         }
-                        _vm.$set(_vm.form, "firstname", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-6" }, [
-                  _c("label", { attrs: { for: "last" } }, [_vm._v("นามสกุล")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.lastname,
-                        expression: "form.lastname"
-                      }
-                    ],
-                    attrs: { type: "text", id: "last" },
-                    domProps: { value: _vm.form.lastname },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-lg-6" }, [
+                      _c("label", { attrs: { for: "last" } }, [
+                        _vm._v("นามสกุล")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.lastname,
+                            expression: "form.lastname"
+                          }
+                        ],
+                        attrs: { type: "text", id: "last" },
+                        domProps: { value: _vm.form.lastname },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "lastname", $event.target.value)
+                          }
                         }
-                        _vm.$set(_vm.form, "lastname", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-12" }, [
-                  _c("label", { attrs: { for: "phone" } }, [
-                    _vm._v("เบอร์โทรศัพท์")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.phone,
-                        expression: "form.phone"
-                      }
-                    ],
-                    attrs: { type: "text", id: "phone" },
-                    domProps: { value: _vm.form.phone },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-lg-12" }, [
+                      _c("label", { attrs: { for: "phone" } }, [
+                        _vm._v("เบอร์โทรศัพท์")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.phone,
+                            expression: "form.phone"
+                          }
+                        ],
+                        attrs: { type: "text", id: "phone" },
+                        domProps: { value: _vm.form.phone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "phone", $event.target.value)
+                          }
                         }
-                        _vm.$set(_vm.form, "phone", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-12" }, [
-                  _c("label", { attrs: { for: "remark" } }, [
-                    _vm._v("หมายเหตุ(ถ้ามี)")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.remark,
-                        expression: "form.remark"
-                      }
-                    ],
-                    attrs: { type: "text", id: "remark" },
-                    domProps: { value: _vm.form.remark },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-lg-12" }, [
+                      _c("label", { attrs: { for: "remark" } }, [
+                        _vm._v("หมายเหตุ(ถ้ามี)")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.remark,
+                            expression: "form.remark"
+                          }
+                        ],
+                        attrs: { type: "text", id: "remark" },
+                        domProps: { value: _vm.form.remark },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "remark", $event.target.value)
+                          }
                         }
-                        _vm.$set(_vm.form, "remark", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("h4", { staticClass: "mb-2" }, [_vm._v("การชำระเงิน")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-12" }, [
-                  _c("img", {
-                    staticClass: "img-fluid text-center",
-                    attrs: { src: "/store/img/payment.jpg", alt: "Prompay" }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "" } }, [
-                    _vm._v("1.กรุณาโอนเงินเข้าบัญชีพร้อมเพย์ของทางร้านเป็น"),
-                    _c("b", { staticClass: "text-success" }, [
-                      _vm._v("จำนวนเงิน " + _vm._s(_vm.total) + " บาท")
+                      })
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(0)
+                  _c("h4", { staticClass: "mb-2" }, [_vm._v("การชำระเงิน")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-12" }, [
+                      _c("img", {
+                        staticClass: "img-fluid text-center",
+                        attrs: { src: "/store/img/payment.jpg", alt: "Prompay" }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v(
+                          "1.กรุณาโอนเงินเข้าบัญชีพร้อมเพย์ของทางร้านเป็น"
+                        ),
+                        _c("b", { staticClass: "text-success" }, [
+                          _vm._v("จำนวนเงิน " + _vm._s(_vm.total) + " บาท")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(0)
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-lg-12" }, [
+                      _c("div", { staticClass: "custom-file" }, [
+                        _c("input", {
+                          ref: "slip",
+                          staticClass: "custom-file-input",
+                          attrs: { type: "file", name: "slip", id: "slip" },
+                          on: { change: _vm.handleFileUpload }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "custom-file-label",
+                            attrs: { for: "slip" }
+                          },
+                          [_vm._v("อัพโหลดหลักฐานการโอนเงิน(สลิป)")]
+                        )
+                      ])
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-12" }, [
-                  _c("div", { staticClass: "custom-file" }, [
-                    _c("input", {
-                      ref: "slip",
-                      staticClass: "custom-file-input",
-                      attrs: { type: "file", name: "slip", id: "slip" },
-                      on: { change: _vm.handleFileUpload }
-                    }),
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("div", { staticClass: "place-order" }, [
+                    _c("h4", { staticClass: "mb-2" }, [
+                      _vm._v("คำสั่งซื้อของคุณ")
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "custom-file-label",
-                        attrs: { for: "slip" }
-                      },
-                      [_vm._v("อัพโหลดหลักฐานการโอนเงิน(สลิป)")]
-                    )
+                    _c("div", { staticClass: "order-total" }, [
+                      _c(
+                        "ul",
+                        { staticClass: "order-table" },
+                        [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _vm._l(_vm.cart, function(cartItem, key) {
+                            return _c(
+                              "li",
+                              { key: key, staticClass: "fw-normal" },
+                              [
+                                _vm._v(
+                                  "\n                                        ซาลาเปา" +
+                                    _vm._s(cartItem.product_name) +
+                                    " x " +
+                                    _vm._s(cartItem.sub_order_amount) +
+                                    " "
+                                ),
+                                _c("span", [
+                                  _vm._v(
+                                    _vm._s(cartItem.sub_order_total) + " บาท"
+                                  )
+                                ])
+                              ]
+                            )
+                          }),
+                          _vm._v(" "),
+                          _c("li", { staticClass: "total-price" }, [
+                            _vm._v("รวมทั้งหมด "),
+                            _c("span", [_vm._v(_vm._s(_vm.total) + " บาท")])
+                          ])
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _vm._m(2)
+                    ])
                   ])
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-6" }, [
-              _c("div", { staticClass: "place-order" }, [
-                _c("h4", { staticClass: "mb-2" }, [_vm._v("คำสั่งซื้อของคุณ")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "order-total" }, [
-                  _c(
-                    "ul",
-                    { staticClass: "order-table" },
-                    [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _vm._l(_vm.cart, function(cartItem, key) {
-                        return _c(
-                          "li",
-                          { key: key, staticClass: "fw-normal" },
-                          [
-                            _vm._v(
-                              "\n                                        ซาลาเปา" +
-                                _vm._s(cartItem.product_name) +
-                                " x " +
-                                _vm._s(cartItem.sub_order_amount) +
-                                " "
-                            ),
-                            _c("span", [
-                              _vm._v(_vm._s(cartItem.sub_order_total) + " บาท")
-                            ])
-                          ]
-                        )
-                      }),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "total-price" }, [
-                        _vm._v("รวมทั้งหมด "),
-                        _c("span", [_vm._v(_vm._s(_vm.total) + " บาท")])
-                      ])
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _vm._m(2)
-                ])
-              ])
-            ])
-          ])
-        ]
-      )
+            ]
+          )
+        : _vm._e()
     ])
   ])
 }
@@ -54129,8 +54153,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/cart */ "./resources/js/store/modules/cart.js");
 /* harmony import */ var _modules_product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/product */ "./resources/js/store/modules/product.js");
 /* harmony import */ var _modules_config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/config */ "./resources/js/store/modules/config.js");
+/* harmony import */ var _modules_order__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/order */ "./resources/js/store/modules/order.js");
 
  // Others store
+
 
 
 
@@ -54140,7 +54166,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   modules: {
     config: _modules_config__WEBPACK_IMPORTED_MODULE_4__["default"],
     cart: _modules_cart__WEBPACK_IMPORTED_MODULE_2__["default"],
-    product: _modules_product__WEBPACK_IMPORTED_MODULE_3__["default"]
+    product: _modules_product__WEBPACK_IMPORTED_MODULE_3__["default"],
+    order: _modules_order__WEBPACK_IMPORTED_MODULE_5__["default"]
   }
 }));
 
@@ -54307,6 +54334,50 @@ __webpack_require__.r(__webpack_exports__);
     },
     storeNameTh: function storeNameTh(state) {
       return state.storeNameTh;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/order.js":
+/*!*********************************************!*\
+  !*** ./resources/js/store/modules/order.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    order: JSON.parse(localStorage.getItem('order'))
+  },
+  getters: {
+    order: function order(state) {
+      return state.order;
+    }
+  },
+  mutations: {
+    PUSH_ORDER: function PUSH_ORDER(state, payload) {
+      if (state.order == null) {
+        state.order = [];
+      }
+
+      state.order.push(payload);
+    },
+    UPDATE_ORDER: function UPDATE_ORDER(state) {
+      localStorage.setItem('order', JSON.stringify(state.order));
+    }
+  },
+  actions: {
+    pushOrder: function pushOrder(_ref, payload) {
+      var commit = _ref.commit;
+      commit('PUSH_ORDER', payload);
+    },
+    updateOrder: function updateOrder(_ref2) {
+      var commit = _ref2.commit;
+      commit('UPDATE_ORDER');
     }
   }
 });

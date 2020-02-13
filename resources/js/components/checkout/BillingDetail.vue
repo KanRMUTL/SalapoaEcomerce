@@ -2,7 +2,7 @@
       <!-- Shopping Cart Section Begin -->
     <section class="mt-3">
         <div class="container">
-            <form action="#" class="checkout-form" @submit="formSubmit">
+            <form action="#" class="checkout-form" @submit="formSubmit" v-if="!paymented">
                 <div class="row">
                     <div class="col-lg-6">
                         <h4 class="mb-2">รายละเอียด</h4>
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import axios from 'axios'
 import swal from 'sweetalert'
 
@@ -82,10 +82,12 @@ export default {
                 phone: '084444548855',
                 remark: 'None',
                 slipFile: ''
-            }
+            },
+            paymented: false,
         }
     },
     methods: {
+        ...mapActions(['pushOrder', 'updateOrder']),
         handleFileUpload () {
             this.form.slipFile = this.$refs.slip.files[0]
         },
@@ -99,13 +101,15 @@ export default {
             }
             return !condition;
         },
+        switchPaymentStatus() {
+            this.paymented = !this.paymented
+        },
         formSubmit (e) {
             e.preventDefault();
 
             if(!this.checkForm()) { // ป้อนข้อมูลไม่ครบ
                 return
             }
-
             let formData = new FormData();
             formData.append('slip', this.form.slipFile);
             formData.append('firstname', this.form.firstname);
@@ -123,11 +127,19 @@ export default {
                     }
                 }
             ).then( function(res) {
+                let order_id = res.data.order_id
+                let order = JSON.parse(localStorage.getItem('order'))
+                if(order == null){
+                    order = []
+                }
+                order.push(order_id)
+                localStorage.setItem('order', JSON.stringify(order))
                 swal({
                     title: 'บันทึกการสั่งซื้อของคุณเรียบร้อย',
                     icon: 'success'
                 })
             }).catch(function(error){
+                console.log(error)
                 swal({
                     title: 'เกิดข้อผิดพลาดในการสั่งซื้อ',
                     text: 'กรุณาตรวจสอบข้อมูลก่อนยืนยันการสั่งซื้อ',
@@ -137,7 +149,7 @@ export default {
         }
     },
      computed: {
-        ...mapGetters(['cart','total', 'amount'])
+        ...mapGetters(['cart','total', 'amount', 'order'])
     }
 }
 

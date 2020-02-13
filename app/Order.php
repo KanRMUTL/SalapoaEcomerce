@@ -18,21 +18,35 @@ class Order extends Model
     public function scopeGetLatestQue($query)
     {
         return $query
-                ->latest()
-                ->where([[
-                    DB::raw('CAST(created_at AS DATE)'), '=', date('Y-m-d')
-                ]])
-                ->first();
+            ->latest()
+            ->where([[
+                DB::raw('CAST(created_at AS DATE)'), '=', date('Y-m-d'),
+            ]])
+            ->first();
     }
 
     public function scopeGetCurrentQue($query)
     {
         $latestQue = $this->getLatestQue();
 
-        if(isset($latestQue->order_que)) {
+        if (isset($latestQue->order_que)) {
             return $latestQue->order_que + 1;
         } else {
             return 1;
         }
+    }
+    public function scopeWaitingQue($query)
+    {
+        $request = $query
+            ->where([
+                [
+                DB::raw('CAST(created_at AS DATE)'), '=', date('Y-m-d'),
+                ],
+                [
+                    'status_id', '=', '10',
+                ]
+            ])
+            ->get();
+        return count($request);
     }
 }
