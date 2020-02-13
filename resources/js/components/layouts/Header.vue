@@ -2,29 +2,6 @@
 
     <!-- Header Section Begin -->
     <header class="header-section">
-
-        <div class="header-top">
-            <div class="container">
-                <div class="ht-left">
-                    <div class="mail-service">
-                        <i class=" fa fa-envelope"></i>
-                        store_xx@gmail.com
-                    </div>
-                    <div class="phone-service">
-                        <i class=" fa fa-phone"></i>
-                        084 - xxx xxxx
-                    </div>
-                </div>
-                <div class="ht-right">
-                    <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
-                    <div class="top-social">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="ti-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="container">
             <div class="inner-header p-0">
                 <div class="row">
@@ -51,8 +28,7 @@
                 </div>
             </div>
         </div>
-
-        <Menu />
+        <Menu :menuSelected="menuSelected"/>
     </header>
     <!-- Header End -->
 </template>
@@ -63,6 +39,12 @@ import CartHover from '../layouts/CartHover'
 import {mapGetters} from 'vuex'
 
 export default {
+    props: {
+        menuSelected: {
+            type: String,
+            required: true
+        }
+    },
     components: {
         Menu,
         CartHover

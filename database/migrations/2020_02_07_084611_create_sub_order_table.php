@@ -14,6 +14,7 @@ class CreateSubOrderTable extends Migration
             $table->integer('sub_order_amount');
             $table->decimal('sub_order_price');
             $table->string('product_id');
+            $table->string('order_id');
             $table->timestamps();
         });
     }

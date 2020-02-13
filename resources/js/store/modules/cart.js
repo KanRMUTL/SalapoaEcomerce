@@ -1,4 +1,5 @@
 import swall from 'sweetalert'
+
 export default {
     state: {
         cart: JSON.parse(localStorage.getItem('cart')),
@@ -58,11 +59,13 @@ export default {
         DELETE_PRODUCT_FROM_CART(state, productId) {
             let index = state.cart.findIndex(cartItem => cartItem.product_id == productId)
             state.cart.splice(index, 1)
-
         },
 
         DECLINE_PRODUCT_FROM_CART(state, productId) {
-
+            let index = state.cart.findIndex(cartItem => cartItem.product_id == productId)
+            let amount = state.cart[index].sub_order_amount
+            state.cart[index].sub_order_amount = amount - 1
+            state.cart[index].sub_order_total = state.cart[index].sub_order_amount * state.cart[index].product_price
         },
 
         UPDATE_CART(state) {
@@ -70,6 +73,7 @@ export default {
             state.cart.forEach(item => {
                 total += Number(item.sub_order_total)
             })
+            console.log(total)
             state.total = total
             state.amount = state.cart.length
             localStorage.setItem('cart', JSON.stringify(state.cart))
@@ -78,18 +82,17 @@ export default {
         }
     },
     actions: {
-        addProductToCart({
-            commit
-        }, product) {
+        addProductToCart({ commit }, product) {
             commit("ADD_PRODUCT_TO_CART", product)
             commit("UPDATE_CART")
+
         },
         deleteProductFromCart({
             commit
         }, productId) {
             swal({
-                    title: "คุณต้องการลบรายการดังกล่าวหรือไม่?",
-                    text: "คุณต้องการลบรายการสินค้าดังกล่าวออกจากตะกร้าสินค้าหรือไม่",
+                    title: "ยืนยันการลบสินค้า",
+                    text: "คุณต้องการลบรายการสินค้าดังกล่าวออกจากตะกร้าหรือไม่?",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -97,13 +100,16 @@ export default {
                 .then((willDelete) => {
                     if (willDelete) {
                         commit("DELETE_PRODUCT_FROM_CART", productId)
-                        commit("UPDATE_CART")
                         swal("ลบรายการสินค้าดังกล่าวเรียบร้อย", {
                             icon: "success",
                         });
+                        commit("UPDATE_CART")
                     }
                 });
-
+        },
+        declineProductFromCart({commit}, productId) {
+            commit('DECLINE_PRODUCT_FROM_CART', productId)
+            commit("UPDATE_CART")
         }
     }
 }
