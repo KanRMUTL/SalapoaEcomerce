@@ -10,7 +10,7 @@
                                 <tr>
                                     <th>รูปสินค้า</th>
                                     <th class="p-name">ชื่อสินค้า</th>
-                                    <th>ราคา</th>
+                                    <th>ราคา/ชิ้น</th>
                                     <th>จำนวน</th>
                                     <th>ราคารวม</th>
                                     <th><i class="ti-close"></i></th>
@@ -39,10 +39,10 @@
                                         ยอดรวมทั้งหมด <span>฿240.00</span>
                                     </li> -->
                                     <li class="cart-total">
-                                        ยอดรวมทั้งหมด <span>฿{{ total }}</span>
+                                        ยอดรวมทั้งหมด <span>{{ total }} บาท</span>
                                     </li>
                                 </ul>
-                                <a href="#" class="primary-btn checkout-btn w-100 text-center">ดำเนินการชำระเงิน</a>
+                                <a href="/checkout" class="primary-btn checkout-btn w-100 text-center">ดำเนินการชำระเงิน</a>
                             </div>
                         </div>
                     </div>

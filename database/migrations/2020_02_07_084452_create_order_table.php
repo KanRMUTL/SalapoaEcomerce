@@ -14,9 +14,10 @@ class CreateOrderTable extends Migration
             $table->string('customer_name');
             $table->string('customer_phone');
             $table->integer('order_que');
+            $table->char('order_code', 5);
             $table->integer('order_amount');
             $table->decimal('order_total', 8, 2);
-            $table->text('order_remark');
+            $table->text('order_remark')->nullable();
             $table->string('order_slip');
             $table->integer('status_id');
             $table->timestamps();

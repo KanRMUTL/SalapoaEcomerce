@@ -6,7 +6,7 @@
         <td class="cart-title">
             <h5>ซาลาเปา{{ product.product_name }}</h5>
         </td>
-        <td class="p-price">฿{{ product.product_price }}</td>
+        <td class="p-price">{{ product.product_price }} บาท</td>
         <td>
             <button
                 type="button"
@@ -24,7 +24,7 @@
                 +
             </button>
         </td>
-        <td class="total-price">฿{{ product.sub_order_total }}</td>
+        <td class="total-price">{{ product.sub_order_total }} บาท</td>
         <td class="close-td">
             <i class="ti-close" @click="deleteProduct(product.product_id)"></i>
         </td>
