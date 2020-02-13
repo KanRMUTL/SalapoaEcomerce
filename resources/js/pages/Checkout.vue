@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Header menuSelected="cart"/>
-    <CartTable />
+    <Header menuSelected="checkout"/>
+    <BillingDetail />
     <Footer />
   </div>
 </template>
@@ -9,13 +9,13 @@
 <script>
 import Header from "../components/layouts/Header";
 import Footer from "../components/layouts/Footer";
-import CartTable from "../components/cart/CartTable";
+import BillingDetail from "../components/checkout/BillingDetail";
 
 export default {
   components: {
     Header,
     Footer,
-    CartTable
+    BillingDetail
   },
 };
 </script>

@@ -3,17 +3,12 @@
     <div class="container text-center">
       <nav class="nav-menu mobile-menu">
         <ul>
-          <li class="active">
-            <a href="/">หน้าแรก</a>
-          </li>
-          <li>
-            <a href="/products">เลือกซื้อซาลาเปา</a>
-          </li>
-          <li>
-            <a href="/cart">ตะกร้าสินค้า</a>
-          </li>
-          <li>
-            <a href="#">ติดต่อเรา</a>
+          <li
+            v-for="(item, key) in menu"
+            :key="key"
+            :class="{'active': isActive(item.check)}"
+            >
+            <a :href="item.path">{{ item.title }}</a>
           </li>
         </ul>
       </nav>
@@ -23,7 +18,50 @@
 </template>
 
 <script>
-export default {};
+export default {
+    props: {
+        menuSelected: {
+            type: String,
+            required: true
+        }
+    },
+    data () {
+        return {
+            menu: [
+                {
+                    title: 'หน้าแรก',
+                    path: '/',
+                    check: 'home'
+                },
+                {
+                    title: 'เลือกซื้อซาลาเปา',
+                    path: '#',
+                    check: 'products'
+                },
+                {
+                    title: 'ตะกร้าสินค้า',
+                    path: '/cart',
+                    check: 'cart'
+                },
+                {
+                    title: 'ชำระเงิน',
+                    path: '/checkout',
+                    check: 'checkout'
+                },
+                {
+                    title: 'ติดต่อเรา',
+                    path: '#',
+                    check: 'contact'
+                },
+            ]
+        }
+    },
+    methods: {
+        isActive(check) {
+            return check == this.menuSelected
+        }
+    }
+};
 </script>
 
 <style>

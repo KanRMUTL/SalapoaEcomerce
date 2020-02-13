@@ -1,11 +1,11 @@
 @extends('store.layouts.master')
 
-@section('title', 'ตะกร้าสินค้า')
+@section('title', 'ชำระเงิน')
 
 ิ@section('content')
 
 <div id="app">
-    <cart></cart>
+    <checkout></checkout>
 </div>
 
 @endsection

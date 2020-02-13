@@ -10,16 +10,10 @@
                             <a href="#"><img src="store/img/footer-logo.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello.colorlib@gmail.com</li>
+                            <li>ที่อยู่: {{ address }}</li>
+                            <li>เบอร์โทร: {{ phone }}</li>
+                            <li>Email: {{ email }}</li>
                         </ul>
-                        <div class="footer-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -28,8 +22,10 @@
                         <ul>
                             <li class="active"><a href="/">หน้าแรก</a></li>
                             <li><a href="#">เลือกซื้อซาลาเปา</a></li>
-                            <li><a href="#">ตะกร้าสินค้า</a></li>
+                            <li><a href="/cart">ตะกร้าสินค้า</a></li>
+                            <li><a href="/checkout">ตะกร้าสินค้า</a></li>
                             <li><a href="#">ติดต่อเรา</a></li>
+                            <li><a href="#">ผู้ดูแลระบบ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -40,8 +36,12 @@
 </template>
 
 <script>
-export default {
+import {mapGetters} from 'vuex'
 
+export default {
+    computed: {
+        ...mapGetters(['address', 'phone', 'email'])
+    }
 }
 </script>
 

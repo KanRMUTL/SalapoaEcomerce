@@ -30,7 +30,7 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-    
+
     @yield('content')
 
     <script src="{{ mix('js/app.js') }}"></script>
