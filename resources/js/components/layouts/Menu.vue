@@ -49,6 +49,11 @@ export default {
                     check: 'checkout'
                 },
                 {
+                    title: 'คิวของคุณ',
+                    path: '/que',
+                    check: 'que'
+                },
+                {
                     title: 'ติดต่อเรา',
                     path: '#',
                     check: 'contact'

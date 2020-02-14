@@ -29,7 +29,6 @@ export default {
                     }
                 });
                 if (hasProduct) {
-                    console.log('มีอยู่แล้ว')
                     let index = state.cart.findIndex(cartItem => cartItem.product_id == product.product_id)
                     state.cart[index].sub_order_amount++
                     state.cart[index].sub_order_total = product.product_price * state.cart[index].sub_order_amount
@@ -39,7 +38,6 @@ export default {
             }
 
             if (state.cart == null || !hasProduct) {
-                console.log('ยังไม่มี')
                 state.cart.push({
                     product_id: product.product_id,
                     product_name: product.product_name,
@@ -73,7 +71,6 @@ export default {
             state.cart.forEach(item => {
                 total += Number(item.sub_order_total)
             })
-            console.log(total)
             state.total = total
             state.amount = state.cart.length
             localStorage.setItem('cart', JSON.stringify(state.cart))
