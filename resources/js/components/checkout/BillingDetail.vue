@@ -56,7 +56,7 @@
                                         <li class="total-price">รวมทั้งหมด <span>{{ total }} บาท</span></li>
                                     </ul>
                                     <div class="order-btn select-button">
-                                        <button type="submit" class="btn primary-btn checkout-btn">ยืนยันการชำระเงิน</button>
+                                        <button type="submit" class="btn primary-btn checkout-btn" :disabled="!total">ยืนยันการชำระเงิน</button>
                                     </div>
                                 </div>
                             </div>
@@ -141,6 +141,9 @@ export default {
                 localStorage.removeItem('cart')
                 localStorage.removeItem('amount')
                 localStorage.removeItem('total')
+                setTimeout(() => {
+                    window.location = '/que'
+                }, 3000)
             }).catch(function(error){
                 console.log(error)
                 swal({

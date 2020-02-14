@@ -13,6 +13,9 @@ Route::get('/checkout', function () {
 Route::get('/que', function () {
     return view('store/que');
 });
+Route::get('/shop', function () {
+    return view('store/shop');
+});
 
 // API
 Route::get('/getproducts', 'ProductController@getProduct');
