@@ -46,8 +46,11 @@ class OrderController extends Controller
 
     public function getOrder($orderId)
     {
-        $order =Order::find($orderId);
+        $order = Order::find($orderId);
         $order->subOrder;
+        foreach($order->subOrder as $subOrder){
+            $subOrder->product;
+        }
 
         $data = [
             'order' => $order,

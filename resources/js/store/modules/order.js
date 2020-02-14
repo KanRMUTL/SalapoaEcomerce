@@ -4,6 +4,7 @@ export default {
     state: {
         order: JSON.parse(localStorage.getItem('order')),
         orderList: [],
+        orderSelected: null,
         status: [
             {
              class: 'text-info',
@@ -28,7 +29,8 @@ export default {
         },
         status(state) {
             return state.status
-        }
+        },
+        orderSelected: state => state.orderSelected
     },
     mutations: {
         SET_ORDER_LIST: (state) => {
@@ -37,13 +39,21 @@ export default {
                     .then( function (res){
                         state.orderList.push(res.data)
                         console.log(state.orderList)
+                    }).catch(error=> {
+                        console.log(error)
                     })
             })
+        },
+        SET_ORDER_SELECTED: (state, payload) => {
+            state.orderSelected = payload
         }
     },
     actions: {
         setOrderList: ({commit}) => {
             commit('SET_ORDER_LIST')
+        },
+        setOrderSelected({commit}, payload) {
+            commit('SET_ORDER_SELECTED', payload)
         }
     }
 }

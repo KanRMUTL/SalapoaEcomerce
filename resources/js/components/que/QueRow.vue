@@ -1,33 +1,38 @@
 <template>
-  <tr>
-      <td>
-          <b>{{ order.order_que }}</b>
-      </td>
-      <td>
-          {{ order.order_code }}
-      </td>
-      <td>
-          {{ waitingQue }}
-      </td>
-      <td>
-          {{ order.order_amount }}
-      </td>
-      <td>
-          {{ order.order_total }}
-      </td>
-      <td :class="status[order.status_id].class">
-          {{ status[order.status_id].title }}
-      </td>
-      <td>
-          <button class="btn btn-primary">
-              <i class="fa fa-search"></i>
-          </button>
-      </td>
-  </tr>
+    <tr>
+        <td>
+            <b>{{ order.order_que }}</b>
+        </td>
+        <td>
+            {{ order.order_code }}
+        </td>
+        <td>
+            {{ waitingQue }}
+        </td>
+        <td>
+            {{ order.order_amount }}
+        </td>
+        <td>
+            {{ order.order_total }}
+        </td>
+        <td :class="status[order.status_id].class">
+            {{ status[order.status_id].title }}
+        </td>
+        <td>
+            <button
+                class="btn btn-primary"
+                data-toggle="modal"
+                data-target="#modal-queselected"
+                @click="setOrderModal()"
+            >
+                <i class="fa fa-search"></i>
+            </button>
+        </td>
+    </tr>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     props: {
@@ -44,12 +49,19 @@ export default {
             required: true
         }
     },
+    methods: {
+        ...mapActions(["setOrderSelected"]),
+        setOrderModal(){
+            this.setOrderSelected({
+                order: this.order,
+                created: this.created,
+                waitingQue: this.waitingQue
+            })
+        }
+    },
     computed: {
-        ...mapGetters(['status'])
+        ...mapGetters(["status"])
     }
-}
+};
 </script>
 
-<style>
-
-</style>
