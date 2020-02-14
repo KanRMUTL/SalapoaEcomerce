@@ -47,7 +47,6 @@ export default {
         QueRow
     },
     mounted () {
-        console.log(JSON.stringify(this.order))
         this.setOrderList()
     },
     methods: {

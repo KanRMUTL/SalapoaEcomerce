@@ -2060,9 +2060,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log(this.cart);
-  },
   components: {
     CartRow: _CartRow__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -2901,7 +2898,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     QueRow: _QueRow__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   mounted: function mounted() {
-    console.log(JSON.stringify(this.order));
     this.setOrderList();
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['setOrderList'])),
@@ -55245,7 +55241,6 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         if (hasProduct) {
-          console.log('มีอยู่แล้ว');
           var index = state.cart.findIndex(function (cartItem) {
             return cartItem.product_id == product.product_id;
           });
@@ -55257,7 +55252,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (state.cart == null || !hasProduct) {
-        console.log('ยังไม่มี');
         state.cart.push({
           product_id: product.product_id,
           product_name: product.product_name,
@@ -55293,7 +55287,6 @@ __webpack_require__.r(__webpack_exports__);
       state.cart.forEach(function (item) {
         total += Number(item.sub_order_total);
       });
-      console.log(total);
       state.total = total;
       state.amount = state.cart.length;
       localStorage.setItem('cart', JSON.stringify(state.cart));

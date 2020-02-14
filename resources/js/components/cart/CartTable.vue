@@ -58,9 +58,6 @@ import CartRow from './CartRow'
 import {mapGetters} from 'vuex'
 
 export default {
-    mounted(){
-        console.log(this.cart)
-    },
     components:{
         CartRow
     },
