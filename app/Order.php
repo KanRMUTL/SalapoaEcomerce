@@ -9,7 +9,10 @@ class Order extends Model
 {
     protected $table = 'order';
     protected $primaryKey = 'order_id';
-
+    public function getCreatedFormated(){
+        $dateCreate = date_create($this->date_create);
+        return date_format($dateCreate, 'd/m/Y เวลา H:i:s');
+    }
     public function subOrder()
     {
         return $this->hasMany('App\Suborder', 'order_id', 'order_id');
@@ -39,12 +42,9 @@ class Order extends Model
     {
         $request = $query
             ->where([
-                [
-                DB::raw('CAST(created_at AS DATE)'), '=', date('Y-m-d'),
-                ],
-                [
-                    'status_id', '=', '10',
-                ]
+                ['status_id', '!=', '3'],
+                ['order_id', '!=', $this->order_id],
+                ['created_at', '<', $this->created_at]
             ])
             ->get();
         return count($request);

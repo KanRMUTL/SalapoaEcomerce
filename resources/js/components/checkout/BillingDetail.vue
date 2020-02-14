@@ -138,6 +138,9 @@ export default {
                     title: 'บันทึกการสั่งซื้อของคุณเรียบร้อย',
                     icon: 'success'
                 })
+                localStorage.removeItem('cart')
+                localStorage.removeItem('amount')
+                localStorage.removeItem('total')
             }).catch(function(error){
                 console.log(error)
                 swal({

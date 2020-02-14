@@ -10,10 +10,14 @@ Route::get('/cart', function () {
 Route::get('/checkout', function () {
     return view('store/checkout');
 });
+Route::get('/que', function () {
+    return view('store/que');
+});
 
 // API
 Route::get('/getproducts', 'ProductController@getProduct');
 Route::post('/createOrder', 'OrderController@createOrder');
+Route::get('/getorder/{orderId}', 'OrderController@getOrder');
 Route::get('/sample', 'OrderController@sample');
 
 // Artisan command

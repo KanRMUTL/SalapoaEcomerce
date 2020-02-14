@@ -29,7 +29,7 @@ class OrderController extends Controller
         $order->order_total = $request->total;
         $order->order_remark = $request->remark;
         $order->order_slip = $fileNameToStore;
-        $order->status_id = 1;
+        $order->status_id = 0;
         $order->save();
 
         $cart = json_decode($request->cart);
@@ -42,6 +42,19 @@ class OrderController extends Controller
             $subOrder->save();
         }
         return response()->json($order);
+    }
 
+    public function getOrder($orderId)
+    {
+        $order =Order::find($orderId);
+        $order->subOrder;
+
+        $data = [
+            'order' => $order,
+            'created' => $order->getCreatedFormated(),
+            'waitingQue' => $order->waitingQue(),
+            'datetime' => date('H:s:i')
+        ];
+        return response()->json($data);
     }
 }
