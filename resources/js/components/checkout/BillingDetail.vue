@@ -77,10 +77,10 @@ export default {
     data() {
         return {
             form: {
-                firstname: 'Kan',
-                lastname: 'kan',
-                phone: '084444548855',
-                remark: 'None',
+                firstname: 'เกียรติศักดิ์',
+                lastname: 'หล่อวงสา',
+                phone: '0845252569',
+                remark: 'ขอไส้เยอะๆ',
                 slipFile: ''
             },
             paymented: false,
@@ -113,7 +113,7 @@ export default {
             let formData = new FormData();
             formData.append('slip', this.form.slipFile);
             formData.append('firstname', this.form.firstname);
-            formData.append('lastnname', this.form.lastnname);
+            formData.append('lastname', this.form.lastname);
             formData.append('phone', this.form.phone);
             formData.append('remark', this.form.remark);
             formData.append('cart', JSON.stringify(this.cart))

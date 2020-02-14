@@ -38,7 +38,6 @@ export default {
                 axios.get(`/getorder/${item}`)
                     .then( function (res){
                         state.orderList.push(res.data)
-                        console.log(state.orderList)
                     }).catch(error=> {
                         console.log(error)
                     })

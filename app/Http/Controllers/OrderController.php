@@ -12,7 +12,7 @@ class OrderController extends Controller
     public function createOrder(Request $request)
     {
         // return response()->json(Order::getCurrentQue());
-        $fullname = $request->firstname . '  ' . $request->lastname;
+        $fullname = $request->firstname . ' ' . $request->lastname;
 
         // File upload
         $extension = $request->file('slip')->getClientOriginalExtension();
