@@ -55764,8 +55764,11 @@ __webpack_require__.r(__webpack_exports__);
       "class": 'text-primary',
       title: 'ทางร้านกำลังจัดทำ'
     }, {
-      "class": 'text-success',
+      "class": 'text-primary',
       title: 'ถึงคิวของท่านแล้ว'
+    }, {
+      "class": 'text-success',
+      title: 'รับซาลาเปามาเรียบร้อย'
     }]
   },
   getters: {
