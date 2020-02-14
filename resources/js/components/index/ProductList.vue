@@ -13,7 +13,7 @@
             <div v-for="(product, key) in products" :key="key" v-show="products" class="product-item">
               <div class="pi-pic">
                 <img :src="`store/img/products/${product.product_img}`" alt />
-                <div class="icon">
+                <div class="icon" @click="addProductToCart(product)">
                   <i class="icon_plus_alt"></i>
                 </div>
                 <ul>

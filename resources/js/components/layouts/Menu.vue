@@ -35,8 +35,8 @@ export default {
                 },
                 {
                     title: 'เลือกซื้อซาลาเปา',
-                    path: '#',
-                    check: 'products'
+                    path: '/shop',
+                    check: 'shop'
                 },
                 {
                     title: 'ตะกร้าสินค้า',
@@ -52,12 +52,7 @@ export default {
                     title: 'คิวของคุณ',
                     path: '/que',
                     check: 'que'
-                },
-                {
-                    title: 'ติดต่อเรา',
-                    path: '#',
-                    check: 'contact'
-                },
+                }
             ]
         }
     },
