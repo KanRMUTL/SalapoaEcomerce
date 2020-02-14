@@ -10,6 +10,7 @@ Vue.component('cart', require('./pages/Cart.vue').default)
 Vue.component('checkout', require('./pages/Checkout.vue').default)
 Vue.component('que', require('./pages/Que.vue').default)
 Vue.component('shop', require('./pages/Shop.vue').default)
+Vue.component('dashboard', require('./pages/backend/Dashboard.vue').default)
 
 const app = new Vue({
     el: '#app',

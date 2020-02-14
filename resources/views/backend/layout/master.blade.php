@@ -33,7 +33,6 @@
         @yield('content')
     </div>
 
-
 <!-- jQuery -->
 <script src="backend/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -62,5 +61,6 @@
 <script src="backend/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="backend/dist/js/demo.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
