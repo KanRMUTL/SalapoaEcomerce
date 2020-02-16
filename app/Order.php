@@ -15,7 +15,7 @@ class Order extends Model
     }
     public function subOrder()
     {
-        return $this->hasMany('App\Suborder', 'order_id', 'order_id');
+        return $this->hasMany('App\SubOrder', 'order_id', 'order_id');
     }
 
     public function scopeGetLatestQue($query)
