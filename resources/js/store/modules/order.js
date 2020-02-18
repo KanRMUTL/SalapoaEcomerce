@@ -15,8 +15,12 @@ export default {
              title: 'ทางร้านกำลังจัดทำ'
             },
             {
-             class: 'text-success',
+             class: 'text-primary',
              title: 'ถึงคิวของท่านแล้ว'
+            },
+            {
+             class: 'text-success',
+             title: 'รับซาลาเปามาเรียบร้อย'
             },
         ]
     },
