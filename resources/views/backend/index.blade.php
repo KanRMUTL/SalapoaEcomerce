@@ -1,6 +1,6 @@
 @extends('backend/layout/master')
 @section('content')
     <div id="app">
-        <dashboard ></dashboard>
+        <backend ></backend>
     </div>
 @endsection

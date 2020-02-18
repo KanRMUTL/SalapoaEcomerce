@@ -20,12 +20,10 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="index2.html"><b>เข้าสู่ระบบ</a>
-  </div>
   <!-- /.login-logo -->
   <div class="card">
-    <div class="card-body login-card-body">
+    <div class="card-body login-card-body text-center">
+    <img src="store/img/logo.png" alt="" class="mb-2">
       <p class="login-box-msg">กรุณาป้อน Username และ Password เพื่อเข้าสู่ระบบ</p>
 
       <form action="../../index3.html" method="post">
