@@ -26,9 +26,15 @@
     <img src="store/img/logo.png" alt="" class="mb-2">
       <p class="login-box-msg">กรุณาป้อน Username และ Password เพื่อเข้าสู่ระบบ</p>
 
-      <form action="../../index3.html" method="post">
+      <form method="POST" action="{{ route('login') }}">
+        @csrf
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username">
+          <input type="text" class="form-control" name="username" placeholder="Username">
+          @error('username')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -36,7 +42,12 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" name="password" placeholder="Password">
+          @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

@@ -24,7 +24,7 @@
                             <li><a href="/shop">เลือกซื้อซาลาเปา</a></li>
                             <li><a href="/cart">ตะกร้าสินค้า</a></li>
                             <li><a href="/checkout">ตะกร้าสินค้า</a></li>
-                            <li><a href="#">ผู้ดูแลระบบ</a></li>
+                            <li><a href="/login">ผู้ดูแลระบบ</a></li>
                         </ul>
                     </div>
                 </div>

@@ -15,6 +15,11 @@ export default new VueRouter({
             component: Dashboard
         },
         {
+            path: '/admin',
+            name: 'dashboard2',
+            component: Dashboard
+        },
+        {
             path: '/admin/que',
             name: 'que',
             component: Que

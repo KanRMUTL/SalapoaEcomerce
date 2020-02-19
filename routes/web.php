@@ -18,19 +18,17 @@ Route::get('/shop', function () {
 });
 
 // Backend Pages
-Route::get('/login', function() {
+Route::get('/login', function () {
     return view('backend/login');
 });
-// Route::get('/admin', function() {
-//     return view('backend/index');
-// });
-Route::get('/{any}/{sub}', function() {
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/{any}/{sub}', function () {
         return view('backend/index');
-})->where('any', 'admin')->where('sub', '.*');
-Route::get('/admin', function() {
-    return view('backend/index');
+    })->where('any', 'admin')->where('sub', '.*');
+    Route::get('/admin', function () {
+        return view('backend/index');
+    });
 });
-
 
 // API
 Route::get('/getproducts', 'ProductController@getProduct');
@@ -49,4 +47,5 @@ Route::get('/storage-link', function () {
     return '<h1>run php storage:link success</h1>';
 });
 
-
+Auth::routes();
+Route::get('/logout', 'Auth\LoginController@logout');
