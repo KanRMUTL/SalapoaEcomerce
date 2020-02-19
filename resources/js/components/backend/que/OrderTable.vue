@@ -46,11 +46,10 @@
 export default {
     props: {
         orders: {
-            type: Object,
+            type: Array,
             required: true
         },
         total: {
-            type: Number,
             required: true
         }
     }

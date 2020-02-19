@@ -75,4 +75,12 @@ class OrderController extends Controller
         }
         return response()->json($orders);
     }
+
+    public function updateStatus($order_id, Request $request)
+    {
+        $order = Order::find($order_id);
+        $order->status_id = $request->statusId;
+        $order->save();
+        return $order;
+    }
 }

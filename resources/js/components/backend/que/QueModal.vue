@@ -5,6 +5,7 @@
         tabindex="-1"
         role="dialog"
         aria-hidden="true"
+        v-if="queSelected"
     >
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -27,7 +28,8 @@
                     <hr>
                     <p>เบอร์โทร : {{ queSelected.customer_phone }}</p>
                     <p>สั่งซื้อเมื่อ : {{ queSelected.dateformated }}</p>
-                    <p>สถานะ : <b :class="status[queSelected.status_id].class">{{ status[queSelected.status_id].title  }}</b></p>
+                    <p>สถานะ : <b :class="status[queSelected.status_id].class">{{ status[queSelected.status_id].title }}</b></p>
+                    <StatusForm :status="status" :statusId="queSelected.status_id" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -40,10 +42,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import OrderTable from './OrderTable'
+import StatusForm from './StatusForm'
 
 export default {
     components: {
-        OrderTable
+        OrderTable,
+        StatusForm
     },
     computed: {
         ...mapGetters(['queSelected', 'status'])
