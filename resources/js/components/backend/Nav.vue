@@ -10,7 +10,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+        <a class="nav-link" href="/logout">
          ออกจากระบบ <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>

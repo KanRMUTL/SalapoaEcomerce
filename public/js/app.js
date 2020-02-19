@@ -39697,21 +39697,10 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("ul", { staticClass: "navbar-nav ml-auto" }, [
           _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: {
-                  "data-widget": "control-sidebar",
-                  "data-slide": "true",
-                  href: "#"
-                }
-              },
-              [
-                _vm._v("\n       ออกจากระบบ "),
-                _c("i", { staticClass: "fas fa-sign-out-alt" })
-              ]
-            )
+            _c("a", { staticClass: "nav-link", attrs: { href: "/logout" } }, [
+              _vm._v("\n       ออกจากระบบ "),
+              _c("i", { staticClass: "fas fa-sign-out-alt" })
+            ])
           ])
         ])
       ]
@@ -40811,7 +40800,9 @@ var staticRenderFns = [
             _c("a", { attrs: { href: "/checkout" } }, [_vm._v("ตะกร้าสินค้า")])
           ]),
           _vm._v(" "),
-          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("ผู้ดูแลระบบ")])])
+          _c("li", [
+            _c("a", { attrs: { href: "/login" } }, [_vm._v("ผู้ดูแลระบบ")])
+          ])
         ])
       ])
     ])
@@ -59599,6 +59590,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   routes: [{
     path: '/admin/dashboard',
     name: 'dashboard',
+    component: _components_backend_dasboard_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }, {
+    path: '/admin',
+    name: 'dashboard2',
     component: _components_backend_dasboard_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
     path: '/admin/que',
