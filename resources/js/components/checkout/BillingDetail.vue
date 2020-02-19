@@ -77,10 +77,10 @@ export default {
     data() {
         return {
             form: {
-                firstname: 'เกียรติศักดิ์',
-                lastname: 'หล่อวงสา',
-                phone: '0845252569',
-                remark: 'ขอไส้เยอะๆ',
+                firstname: '',
+                lastname: '',
+                phone: '',
+                remark: '',
                 slipFile: ''
             },
             paymented: false,
