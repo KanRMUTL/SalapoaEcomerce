@@ -1,22 +1,82 @@
 <template>
-  <Title :title="title" />
+    <div>
+        <Title :title="title" />
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">รายการคิววันนี้</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table
+                    id="datatable"
+                    class="table table-bordered table-striped"
+                >
+                    <thead>
+                        <tr>
+                            <th>ลำดับคิว</th>
+                            <th>รหัสบัตรคิว</th>
+                            <th>ชื่อ - สกุล</th>
+                            <th>จำนวนรายการ</th>
+                            <th>ราคาทั้งหมด</th>
+                            <th>สถานะ</th>
+                            <th class="text-center">เพิ่มเติม</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(que, key) in todayQue" :key="key">
+                            <td>{{ que.order_que }}</td>
+                            <td>{{ que.order_code }}</td>
+                            <td>{{ que.customer_name }}</td>
+                            <td>{{ que.order_amount }}</td>
+                            <td>{{ que.order_total }}</td>
+                            <td :class="status[que.status_id].class">
+                                {{ status[que.status_id].title }}
+                            </td>
+                            <td class="text-center">
+                                <button
+                                    @click="setQueSelected(que)"
+                                    class="btn btn-info btn-sm"
+                                    data-toggle="modal"
+                                    data-target="#queModal"
+                                >
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <QueModal />
+    </div>
 </template>
 
 <script>
-import Title from '../Title'
+import Title from "../Title";
+import QueModal from "./queModal";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
     components: {
-        Title
+        Title,
+        QueModal
+    },
+    mounted() {
+        this.getOrderToday();
     },
     data() {
-        return{
-            title: 'คิววันนี้'
-        }
+        return {
+            title: "คิววันนี้"
+        };
+    },
+    methods: {
+        ...mapActions(["getOrderToday", "setQueSelected"])
+    },
+    computed: {
+        ...mapGetters(["todayQue", "status"])
     }
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -35,6 +35,7 @@ Route::get('/getproducts', 'ProductController@getProduct');
 Route::post('/createOrder', 'OrderController@createOrder');
 Route::get('/getorder/{orderId}', 'OrderController@getOrder');
 Route::get('/sample', 'OrderController@sample');
+Route::get('/ordertoday', 'OrderController@getOrdersToday');
 
 // Artisan command
 Route::get('/config-clear', function () {

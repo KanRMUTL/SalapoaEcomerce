@@ -47,6 +47,9 @@
 <!-- daterangepicker -->
 <script src="/backend/plugins/moment/moment.min.js"></script>
 <script src="/backend/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- DataTables -->
+<script src="/backend/plugins/datatables/jquery.dataTables.js"></script>
+<script src="/backend/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="/backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
@@ -60,5 +63,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/backend/dist/js/demo.js"></script>
 <script src="/js/app.js"></script>
+
+ิ@yield('script')
 </body>
 </html>
