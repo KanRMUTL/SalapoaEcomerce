@@ -11,16 +11,16 @@ export default {
              title: 'บันทึกคำสั่งซื้อแล้ว'
             },
             {
-             class: 'text-primary',
+             class: 'text-warning',
              title: 'ทางร้านกำลังจัดทำ'
             },
             {
              class: 'text-primary',
-             title: 'ถึงคิวของท่านแล้ว'
+             title: 'ถึงคิวของลูกค้าแล้ว'
             },
             {
              class: 'text-success',
-             title: 'รับซาลาเปามาเรียบร้อย'
+             title: 'ลูกค้าได้รับซาลาเปาแล้ว'
             },
         ]
     },

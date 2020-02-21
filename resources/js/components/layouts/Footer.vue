@@ -23,7 +23,7 @@
                             <li class="active"><a href="/">หน้าแรก</a></li>
                             <li><a href="/shop">เลือกซื้อซาลาเปา</a></li>
                             <li><a href="/cart">ตะกร้าสินค้า</a></li>
-                            <li><a href="/checkout">ตะกร้าสินค้า</a></li>
+                            <li><a href="/checkout">ชำระเงิน</a></li>
                             <li><a href="/login">ผู้ดูแลระบบ</a></li>
                         </ul>
                     </div>

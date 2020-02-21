@@ -11,8 +11,7 @@ class OrderController extends Controller
 {
     public function createOrder(Request $request)
     {
-        // return response()->json(Order::getCurrentQue());
-        $fullname = $request->firstname . ' ' . $request->lastname;
+        $fullname = $request->firstname . '   ' . $request->lastname;
 
         // File upload
         $extension = $request->file('slip')->getClientOriginalExtension();
@@ -59,5 +58,43 @@ class OrderController extends Controller
             'datetime' => date('H:s:i')
         ];
         return response()->json($data);
+    }
+
+    public function getOrdersToday(){
+        $today = date('Y-m-d');
+        $start = $today.' 00:00:00';
+        $end = $today.' 23:59:59';
+        $orders = Order::whereBetween('created_at', [$start, $end])->get();
+
+        foreach($orders as $key => $order){
+            $order->subOrder;
+            $orders[$key]['dateformated'] = $order->getCreatedFormated();
+            foreach($order->subOrder as $subOrder){
+                $subOrder->product;
+            }
+        }
+        return response()->json($orders);
+    }
+
+    public function updateStatus($order_id, Request $request)
+    {
+        $order = Order::find($order_id);
+        $order->status_id = $request->statusId;
+        $order->save();
+        return $order;
+    }
+
+    public function getOrders()
+    {
+        $orders = Order::all();
+
+        foreach($orders as $key => $order){
+            $order->subOrder;
+            $orders[$key]['dateformated'] = $order->getCreatedFormated();
+            foreach($order->subOrder as $subOrder){
+                $subOrder->product;
+            }
+        }
+        return response()->json($orders);
     }
 }
