@@ -38,6 +38,7 @@ Route::get('/sample', 'OrderController@sample');
 Route::get('/ordertoday', 'OrderController@getOrdersToday');
 Route::put('/updatestatusorder/{order_id}', 'OrderController@updateStatus');
 Route::get('/orders', 'OrderController@getOrders');
+Route::get('/reportorder', 'ProductController@report');
 
 // Artisan command
 Route::get('/config-clear', function () {

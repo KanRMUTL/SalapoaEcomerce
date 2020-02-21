@@ -7,6 +7,7 @@ import product from './modules/product'
 import config from './modules/config'
 import order from './modules/order'
 import backendOrder from './modules/backend/backendOrder'
+import report from './modules/backend/report'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
         cart,
         product,
         order,
-        backendOrder
+        backendOrder,
+        report
     }
 })
