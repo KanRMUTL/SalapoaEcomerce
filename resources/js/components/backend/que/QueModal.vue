@@ -29,7 +29,7 @@
                     <p>เบอร์โทร : {{ queSelected.customer_phone }}</p>
                     <p>สั่งซื้อเมื่อ : {{ queSelected.dateformated }}</p>
                     <p>สถานะ : <b :class="status[queSelected.status_id].class">{{ status[queSelected.status_id].title }}</b></p>
-                    <StatusForm :status="status" :statusId="queSelected.status_id" />
+                    <StatusForm v-if="showForm" :status="status" :statusId="queSelected.status_id" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -45,6 +45,12 @@ import OrderTable from './OrderTable'
 import StatusForm from './StatusForm'
 
 export default {
+    props: {
+        showForm:{
+            type: Boolean,
+            default: true
+        }
+    },
     components: {
         OrderTable,
         StatusForm

@@ -11,7 +11,7 @@ class OrderController extends Controller
 {
     public function createOrder(Request $request)
     {
-        $fullname = $request->firstname . ' ' . $request->lastname;
+        $fullname = $request->firstname . '   ' . $request->lastname;
 
         // File upload
         $extension = $request->file('slip')->getClientOriginalExtension();
@@ -82,5 +82,19 @@ class OrderController extends Controller
         $order->status_id = $request->statusId;
         $order->save();
         return $order;
+    }
+
+    public function getOrders()
+    {
+        $orders = Order::all();
+
+        foreach($orders as $key => $order){
+            $order->subOrder;
+            $orders[$key]['dateformated'] = $order->getCreatedFormated();
+            foreach($order->subOrder as $subOrder){
+                $subOrder->product;
+            }
+        }
+        return response()->json($orders);
     }
 }

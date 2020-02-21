@@ -8,7 +8,6 @@
                         <thead>
                             <tr>
                                 <th>สินค้า</th>
-                                <th class="text-center">จำนวน</th>
                                 <th class="text-right">ราคา</th>
                             </tr>
                         </thead>
@@ -16,16 +15,14 @@
                             <tr v-for="(order, key) in orders" :key="key">
                                 <td>
                                     {{ order.product.product_name }}
-                                </td>
-                                <td class="text-center">
-                                    {{ order.sub_order_amount }}
+                                    <span class="badge badge-primary p-1">{{ order.sub_order_amount }} ชิ้น</span>
                                 </td>
                                 <td class="text-right">
                                     {{ order.sub_order_price }}
                                 </td>
                             </tr>
                             <tr class="text-primary">
-                                <td colspan="2">
+                                <td>
                                     <b>ราคารวม</b>
                                 </td>
                                 <td class="text-right">

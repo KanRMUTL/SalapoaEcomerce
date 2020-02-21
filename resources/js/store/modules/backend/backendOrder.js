@@ -16,6 +16,11 @@ export default {
                 .then(res => state.todayQue = res.data)
                 .catch(error => console.log(error))
         },
+        GET_ORDERS: (state) => {
+            axios.get('/orders')
+                .then(res => state.todayQue = res.data)
+                .catch(error => console.log(error))
+        },
         SET_QUE_SELECTED: (state, payload) => {
             state.queSelected = payload
         },
@@ -25,10 +30,9 @@ export default {
                     statusId: statusId
                 })
                 .then(res => {
-                    console.log('updated')
                     swal(
-                        'Good job!',
-                        'You clicked the button!',
+                        'อัพเดทสถานะสำเร็จ',
+                        'อัพเดทสถานะของการสั่งซื้อเรียบร้อย',
                         'success'
                     )
                     axios.get('/ordertoday')
@@ -43,6 +47,11 @@ export default {
             commit
         }) => {
             commit('GET_ORDER_TODAY');
+        },
+        getOrders: ({
+            commit
+        }) => {
+            commit('GET_ORDERS');
         },
         setQueSelected: ({
             commit
