@@ -12,4 +12,10 @@ class ProductController extends Controller
         $products = Product::all();
         return response()->json($products);
     }
+
+    public function report()
+    {
+        $products = Product::reportOrder();
+        return response()->json($products);
+    }
 }

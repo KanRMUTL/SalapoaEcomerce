@@ -51,7 +51,7 @@ export default {
                     icon: 'clock'
                 },
                 {
-                    title: 'สินค้า',
+                    title: 'การขายสินค้า',
                     path: '/admin/product',
                     check: 'product',
                     icon: 'shopping-cart'
