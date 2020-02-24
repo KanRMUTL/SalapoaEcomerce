@@ -28,6 +28,8 @@
                     <hr>
                     <p>เบอร์โทร : {{ queSelected.customer_phone }}</p>
                     <p>สั่งซื้อเมื่อ : {{ queSelected.dateformated }}</p>
+                    <p v-if="queSelected.order_address">ที่อยู่ : {{ queSelected.order_address }}</p>
+                    <p>หมายเหตุ : {{ queSelected.order_remark }}</p>
                     <p>สถานะ : <b :class="status[queSelected.status_id].class">{{ status[queSelected.status_id].title }}</b></p>
                     <StatusForm v-if="showForm" :status="status" :statusId="queSelected.status_id" />
                 </div>

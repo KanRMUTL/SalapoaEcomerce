@@ -2246,6 +2246,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2265,7 +2271,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["getOrders", "setQueSelected"])),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(["todayQue", "status"]))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(["todayQue", "status", "shippingType"]))
 });
 
 /***/ }),
@@ -2419,6 +2425,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2438,7 +2450,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["getOrderToday", "setQueSelected"])),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(["todayQue", "status"]))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(["todayQue", "status", "shippingType"]))
 });
 
 /***/ }),
@@ -2461,6 +2473,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -40461,6 +40475,24 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        class:
+                          _vm.shippingType[que.order_shipping_type].class +
+                          " font-weight-bold text-center"
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              _vm.shippingType[que.order_shipping_type].title
+                            ) +
+                            "\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
                     _c("td", { staticClass: "text-center" }, [
                       _vm._v(
                         "\n                            " +
@@ -40470,22 +40502,31 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "text-center" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-info btn-sm",
-                          attrs: {
-                            "data-toggle": "modal",
-                            "data-target": "#slipModal"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.setQueSelected(que)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fa fa-eye" })]
-                      )
+                      que.order_slip
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info btn-sm",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#slipModal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.setQueSelected(que)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                พร้อมเพย์ "
+                              ),
+                              _c("i", { staticClass: "fa fa-qrcode" })
+                            ]
+                          )
+                        : _c("b", { staticClass: "text-success" }, [
+                            _vm._v("ชำระเงินปลายทาง")
+                          ])
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "text-center" }, [
@@ -40547,11 +40588,13 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("สถานะ")]),
         _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [
+          _vm._v("ช่องทางการรับสินค้า")
+        ]),
+        _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("วันที่สั่งซื้อ")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [
-          _vm._v("หลักฐานการชำระเงิน")
-        ]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("การชำระเงิน")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("เพิ่มเติม")])
       ])
@@ -40725,23 +40768,50 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        class:
+                          _vm.shippingType[que.order_shipping_type].class +
+                          " font-weight-bold text-center"
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              _vm.shippingType[que.order_shipping_type].title
+                            ) +
+                            "\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
                     _c("td", { staticClass: "text-center" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-info btn-sm",
-                          attrs: {
-                            "data-toggle": "modal",
-                            "data-target": "#slipModal"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.setQueSelected(que)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fa fa-eye" })]
-                      )
+                      que.order_slip
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info btn-sm",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#slipModal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.setQueSelected(que)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                พร้อมเพย์ "
+                              ),
+                              _c("i", { staticClass: "fa fa-qrcode" })
+                            ]
+                          )
+                        : _c("b", { staticClass: "text-success" }, [
+                            _vm._v("ชำระเงินปลายทาง")
+                          ])
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "text-center" }, [
@@ -40806,8 +40876,10 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-center" }, [_vm._v("สถานะ")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [
-          _vm._v("หลักฐานการชำระเงิน")
+          _vm._v("ช่องทางการรับสินค้า")
         ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("การชำระเงิน")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("เพิ่มเติม")])
       ])
@@ -40918,6 +40990,20 @@ var render = function() {
                       _vm._v(
                         "สั่งซื้อเมื่อ : " +
                           _vm._s(_vm.queSelected.dateformated)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm.queSelected.order_address
+                      ? _c("p", [
+                          _vm._v(
+                            "ที่อยู่ : " + _vm._s(_vm.queSelected.order_address)
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "หมายเหตุ : " + _vm._s(_vm.queSelected.order_remark)
                       )
                     ]),
                     _vm._v(" "),
@@ -41170,11 +41256,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "info-box-number" }, [
-                  _vm._v(
-                    "\r\n                    ราคารวม " +
-                      _vm._s(_vm.productTotal(product.total)) +
-                      " บาท\r\n                "
-                  )
+                  _vm._v("\n                    ราคารวม "),
+                  _c("b", { staticClass: "text-success" }, [
+                    _vm._v(_vm._s(_vm.productTotal(product.total)) + " ")
+                  ]),
+                  _vm._v("บาท\n                ")
                 ])
               ])
             ])
@@ -61838,10 +61924,12 @@ __webpack_require__.r(__webpack_exports__);
     }],
     shippingType: [{
       title: 'เดินทางไปรับด้วยตนเอง',
-      value: '0'
+      value: '0',
+      "class": 'text-success'
     }, {
       title: 'ทางร้านจัดส่งให้',
-      value: '1'
+      value: '1',
+      "class": 'text-primary'
     }]
   },
   getters: {

@@ -18,8 +18,9 @@
                             <th class="text-center">จำนวนรายการ</th>
                             <th class="text-center">ราคาทั้งหมด</th>
                             <th class="text-center">สถานะ</th>
+                            <th class="text-center">ช่องทางการรับสินค้า</th>
                             <th class="text-center">วันที่สั่งซื้อ</th>
-                            <th class="text-center">หลักฐานการชำระเงิน</th>
+                            <th class="text-center">การชำระเงิน</th>
                             <th class="text-center">เพิ่มเติม</th>
                         </tr>
                     </thead>
@@ -32,6 +33,9 @@
                             <td :class="status[que.status_id].class + ' font-weight-bold text-center'">
                                 {{ status[que.status_id].title }}
                             </td>
+                             <td :class="shippingType[que.order_shipping_type].class + ' font-weight-bold text-center'">
+                                {{ shippingType[que.order_shipping_type].title }}
+                            </td>
                             <td class="text-center">
                                 {{ que.dateformated }}
                             </td>
@@ -41,9 +45,11 @@
                                     class="btn btn-info btn-sm"
                                     data-toggle="modal"
                                     data-target="#slipModal"
+                                    v-if="que.order_slip"
                                 >
-                                    <i class="fa fa-eye"></i>
+                                    พร้อมเพย์ <i class="fa fa-qrcode"></i>
                                 </button>
+                                <b class="text-success" v-else>ชำระเงินปลายทาง</b>
                             </td>
                             <td class="text-center">
                                 <button
@@ -90,7 +96,7 @@ export default {
         ...mapActions(["getOrders", "setQueSelected"])
     },
     computed: {
-        ...mapGetters(["todayQue", "status"])
+        ...mapGetters(["todayQue", "status", "shippingType"])
     }
 };
 </script>

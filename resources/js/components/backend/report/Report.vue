@@ -11,7 +11,7 @@
             <div class="info-box-content">
                 <span class="info-box-text">ขายได้ {{ productTotal(product.amount) }} ชิ้น</span>
                 <span class="info-box-number">
-                    ราคารวม {{ productTotal(product.total) }} บาท
+                    ราคารวม <b class="text-success">{{ productTotal(product.total) }} </b>บาท
                 </span>
             </div>
             <!-- /.info-box-content -->

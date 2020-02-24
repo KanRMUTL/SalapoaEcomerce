@@ -17,11 +17,13 @@ export default {
         shippingType: [
             {
                 title: 'เดินทางไปรับด้วยตนเอง',
-                value: '0'
+                value: '0',
+                class: 'text-success'
             },
             {
                 title: 'ทางร้านจัดส่งให้',
-                value: '1'
+                value: '1',
+                class: 'text-primary'
             }
         ]
     },
