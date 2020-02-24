@@ -2188,6 +2188,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       title: 'แดชบอร์ด',
       order: ''
     };
+  },
+  methods: {
+    price: function price(value) {
+      return value ? value : 0;
+    }
   }
 });
 
@@ -40383,7 +40388,11 @@ var render = function() {
                 _c("div", { staticClass: "inner" }, [
                   _c("p", [_vm._v("ยอดขายวันนี้")]),
                   _vm._v(" "),
-                  _c("h3", [_vm._v(_vm._s(_vm.order.orderTotalToday) + " บาท")])
+                  _c("h3", [
+                    _vm._v(
+                      _vm._s(_vm.price(_vm.order.orderTotalToday)) + " บาท"
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
                 _vm._m(1),
@@ -40441,7 +40450,9 @@ var render = function() {
                 _c("div", { staticClass: "inner" }, [
                   _c("p", [_vm._v("ยอดขายทั้งหมด")]),
                   _vm._v(" "),
-                  _c("h3", [_vm._v(_vm._s(_vm.order.orderTotal))])
+                  _c("h3", [
+                    _vm._v(_vm._s(_vm.price(_vm.order.orderTotal)) + " บาท")
+                  ])
                 ]),
                 _vm._v(" "),
                 _vm._m(3),

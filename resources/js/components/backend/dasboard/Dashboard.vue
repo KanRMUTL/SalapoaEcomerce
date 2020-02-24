@@ -25,7 +25,7 @@
                     <div class="small-box bg-success">
                         <div class="inner">
                             <p>ยอดขายวันนี้</p>
-                            <h3>{{ order.orderTotalToday }} บาท</h3>
+                            <h3>{{ price(order.orderTotalToday) }} บาท</h3>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -57,7 +57,7 @@
                     <div class="small-box bg-danger">
                         <div class="inner">
                             <p>ยอดขายทั้งหมด</p>
-                            <h3>{{ order.orderTotal}}</h3>
+                            <h3>{{ price(order.orderTotal) }} บาท</h3>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -91,6 +91,11 @@ export default {
         return{
             title: 'แดชบอร์ด',
             order: ''
+        }
+    },
+    methods: {
+        price(value){
+            return value ? value : 0
         }
     }
 };
