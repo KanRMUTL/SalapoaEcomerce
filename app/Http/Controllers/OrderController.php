@@ -13,13 +13,20 @@ class OrderController extends Controller
     {
         $fullname = $request->firstname . '   ' . $request->lastname;
 
-        // File upload
-        $extension = $request->file('slip')->getClientOriginalExtension();
-        $fileNameToStore = Str::random(8) . '.' . $extension;
-        $path = $request->file('slip')->storeAs('public/images', $fileNameToStore);
-
         // Save Order
         $order = new Order;
+
+        // File upload
+        if($request->hasFile('slip')){
+            $extension = $request->file('slip')->getClientOriginalExtension();
+            $fileNameToStore = Str::random(8) . '.' . $extension;
+            $path = $request->file('slip')->storeAs('public/images', $fileNameToStore);
+            $order->order_slip = $fileNameToStore;
+        }
+        if($request->has('address')){
+            $order->order_address = $request->address;
+        }
+
         $order->customer_name = $fullname;
         $order->customer_phone = $request->phone;
         $order->order_que = Order::getCurrentQue();
@@ -27,7 +34,8 @@ class OrderController extends Controller
         $order->order_amount = $request->amount;
         $order->order_total = $request->total;
         $order->order_remark = $request->remark;
-        $order->order_slip = $fileNameToStore;
+        $order->order_payment_type = $request->payment_type;
+        $order->order_shipping_type = $request->shipping_type;
         $order->status_id = 0;
         $order->save();
 

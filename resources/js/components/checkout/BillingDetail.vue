@@ -19,13 +19,42 @@
                                 <label for="phone">เบอร์โทรศัพท์</label>
                                 <input type="text" id="phone" v-model="form.phone">
                             </div>
+                             <div class="col-lg-12 mb-2">
+                                <label for="shipping">ช่องทางการรับสินค้า</label>
+                                <select class="form-control" id="shipping" v-model="form.shippingId">
+                                    <option
+                                        v-for="(shipping, key) in shippingType"
+                                        :key="key"
+                                        :value="shipping.value"
+                                    >
+                                        {{ shipping.title }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-12" v-if="form.shippingId == 1">
+                                <label for="address">ที่อยู่</label>
+                                <input type="text" id="address" v-model="form.address">
+                            </div>
                             <div class="col-lg-12">
                                 <label for="remark">หมายเหตุ(ถ้ามี)</label>
                                 <input type="text" id="remark" v-model="form.remark">
                             </div>
                         </div>
-                        <h4 class="mb-2">การชำระเงิน</h4>
-                        <div class="row">
+                        <h4 class="fw-title">การชำระเงิน</h4>
+                        <div class="col-lg-12 mb-2">
+                            <label for="shipping">ช่องทางการรับสินค้า</label>
+                            <select class="form-control" id="shipping" v-model="form.paymentId">
+                                <option
+                                    v-for="(payment, key) in paymentType"
+                                    :key="key"
+                                    :value="payment.value"
+                                >
+                                    {{ payment.title }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="row" v-if="form.paymentId == 0">
                             <div class="col-lg-12">
                                 <img src="/store/img/payment.jpg" alt="Prompay" class="img-fluid text-center">
                                 <label for="">1.กรุณาโอนเงินเข้าบัญชีพร้อมเพย์ของทางร้านเป็น<b class="text-success">จำนวนเงิน {{ total }} บาท</b></label>
@@ -37,6 +66,9 @@
                                     <label class="custom-file-label" for="slip">อัพโหลดหลักฐานการโอนเงิน(สลิป)</label>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-lg-12" v-else>
+                            มีค่าบริการในการจัดส่ง
                         </div>
                     </div>
 
@@ -80,6 +112,9 @@ export default {
                 firstname: '',
                 lastname: '',
                 phone: '',
+                address: '',
+                paymentId: 0,
+                shippingId: 0,
                 remark: '',
                 slipFile: ''
             },
@@ -92,7 +127,7 @@ export default {
             this.form.slipFile = this.$refs.slip.files[0]
         },
         checkForm () {
-            let condition = this.form.firstname == '' || this.form.lastname == '' || this.form.phone == '' || this.form.slipFile == '';
+            let condition = this.form.firstname == '' || this.form.lastname == '' || this.form.phone == '' || (this.form.paymentId == 0 && this.form.slipFile == '');
             if(condition){ // ป้อนข้อมูลไม่ครบ
                 swal({
                     title: 'กรุณาป้อนข้อมูลให้ครบถ้วน',
@@ -111,7 +146,6 @@ export default {
                 return
             }
             let formData = new FormData();
-            formData.append('slip', this.form.slipFile);
             formData.append('firstname', this.form.firstname);
             formData.append('lastname', this.form.lastname);
             formData.append('phone', this.form.phone);
@@ -119,6 +153,14 @@ export default {
             formData.append('cart', JSON.stringify(this.cart))
             formData.append('amount', this.amount)
             formData.append('total', this.total)
+            formData.append('payment_type', this.form.paymentId)
+            formData.append('shipping_type', this.form.shippingId)
+            if(this.form.paymentId == 0) {
+                formData.append('slip', this.form.slipFile);
+            }
+            if(this.form.shippingId == 1){
+                formData.append('address', this.form.address)
+            }
             axios.post('/createOrder',
                 formData,
                 {
@@ -155,7 +197,7 @@ export default {
         }
     },
      computed: {
-        ...mapGetters(['cart','total', 'amount', 'order'])
+        ...mapGetters(['cart','total', 'amount', 'order', 'paymentType', 'shippingType'])
     }
 }
 

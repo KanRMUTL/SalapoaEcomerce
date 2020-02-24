@@ -15,6 +15,10 @@ export default {
              title: 'ทางร้านกำลังจัดทำ'
             },
             {
+             class: 'text-warning',
+             title: 'กำลังจัดส่งซาลาเปา'
+            },
+            {
              class: 'text-primary',
              title: 'ถึงคิวของลูกค้าแล้ว'
             },

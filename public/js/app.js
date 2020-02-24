@@ -2921,6 +2921,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2931,6 +2963,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         firstname: '',
         lastname: '',
         phone: '',
+        address: '',
+        paymentId: 0,
+        shippingId: 0,
         remark: '',
         slipFile: ''
       },
@@ -2942,7 +2977,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.form.slipFile = this.$refs.slip.files[0];
     },
     checkForm: function checkForm() {
-      var condition = this.form.firstname == '' || this.form.lastname == '' || this.form.phone == '' || this.form.slipFile == '';
+      var condition = this.form.firstname == '' || this.form.lastname == '' || this.form.phone == '' || this.form.paymentId == 0 && this.form.slipFile == '';
 
       if (condition) {
         // ป้อนข้อมูลไม่ครบ
@@ -2966,7 +3001,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       var formData = new FormData();
-      formData.append('slip', this.form.slipFile);
       formData.append('firstname', this.form.firstname);
       formData.append('lastname', this.form.lastname);
       formData.append('phone', this.form.phone);
@@ -2974,6 +3008,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       formData.append('cart', JSON.stringify(this.cart));
       formData.append('amount', this.amount);
       formData.append('total', this.total);
+      formData.append('payment_type', this.form.paymentId);
+      formData.append('shipping_type', this.form.shippingId);
+
+      if (this.form.paymentId == 0) {
+        formData.append('slip', this.form.slipFile);
+      }
+
+      if (this.form.shippingId == 1) {
+        formData.append('address', this.form.address);
+      }
+
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/createOrder', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -3008,7 +3053,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['cart', 'total', 'amount', 'order']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['cart', 'total', 'amount', 'order', 'paymentType', 'shippingType']))
 });
 
 /***/ }),
@@ -41126,9 +41171,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("span", { staticClass: "info-box-number" }, [
                   _vm._v(
-                    "\n                    ราคารวม " +
+                    "\r\n                    ราคารวม " +
                       _vm._s(_vm.productTotal(product.total)) +
-                      " บาท\n                "
+                      " บาท\r\n                "
                   )
                 ])
               ])
@@ -41457,6 +41502,94 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
+                    _c("div", { staticClass: "col-lg-12 mb-2" }, [
+                      _c("label", { attrs: { for: "shipping" } }, [
+                        _vm._v("ช่องทางการรับสินค้า")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.shippingId,
+                              expression: "form.shippingId"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "shipping" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "shippingId",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        _vm._l(_vm.shippingType, function(shipping, key) {
+                          return _c(
+                            "option",
+                            { key: key, domProps: { value: shipping.value } },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(shipping.title) +
+                                  "\n                                "
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm.form.shippingId == 1
+                      ? _c("div", { staticClass: "col-lg-12" }, [
+                          _c("label", { attrs: { for: "address" } }, [
+                            _vm._v("ที่อยู่")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.address,
+                                expression: "form.address"
+                              }
+                            ],
+                            attrs: { type: "text", id: "address" },
+                            domProps: { value: _vm.form.address },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "address",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c("div", { staticClass: "col-lg-12" }, [
                       _c("label", { attrs: { for: "remark" } }, [
                         _vm._v("หมายเหตุ(ถ้ามี)")
@@ -41485,47 +41618,113 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("h4", { staticClass: "mb-2" }, [_vm._v("การชำระเงิน")]),
+                  _c("h4", { staticClass: "fw-title" }, [
+                    _vm._v("การชำระเงิน")
+                  ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-lg-12" }, [
-                      _c("img", {
-                        staticClass: "img-fluid text-center",
-                        attrs: { src: "/store/img/payment.jpg", alt: "Prompay" }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "" } }, [
-                        _vm._v(
-                          "1.กรุณาโอนเงินเข้าบัญชีพร้อมเพย์ของทางร้านเป็น"
-                        ),
-                        _c("b", { staticClass: "text-success" }, [
-                          _vm._v("จำนวนเงิน " + _vm._s(_vm.total) + " บาท")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(0)
+                  _c("div", { staticClass: "col-lg-12 mb-2" }, [
+                    _c("label", { attrs: { for: "shipping" } }, [
+                      _vm._v("ช่องทางการรับสินค้า")
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-12" }, [
-                      _c("div", { staticClass: "custom-file" }, [
-                        _c("input", {
-                          ref: "slip",
-                          staticClass: "custom-file-input",
-                          attrs: { type: "file", name: "slip", id: "slip" },
-                          on: { change: _vm.handleFileUpload }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
+                    _c(
+                      "select",
+                      {
+                        directives: [
                           {
-                            staticClass: "custom-file-label",
-                            attrs: { for: "slip" }
-                          },
-                          [_vm._v("อัพโหลดหลักฐานการโอนเงิน(สลิป)")]
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.paymentId,
+                            expression: "form.paymentId"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "shipping" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "paymentId",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.paymentType, function(payment, key) {
+                        return _c(
+                          "option",
+                          { key: key, domProps: { value: payment.value } },
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(payment.title) +
+                                "\n                            "
+                            )
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.form.paymentId == 0
+                    ? _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-lg-12" }, [
+                          _c("img", {
+                            staticClass: "img-fluid text-center",
+                            attrs: {
+                              src: "/store/img/payment.jpg",
+                              alt: "Prompay"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "" } }, [
+                            _vm._v(
+                              "1.กรุณาโอนเงินเข้าบัญชีพร้อมเพย์ของทางร้านเป็น"
+                            ),
+                            _c("b", { staticClass: "text-success" }, [
+                              _vm._v("จำนวนเงิน " + _vm._s(_vm.total) + " บาท")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(0)
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-lg-12" }, [
+                          _c("div", { staticClass: "custom-file" }, [
+                            _c("input", {
+                              ref: "slip",
+                              staticClass: "custom-file-input",
+                              attrs: { type: "file", name: "slip", id: "slip" },
+                              on: { change: _vm.handleFileUpload }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "custom-file-label",
+                                attrs: { for: "slip" }
+                              },
+                              [_vm._v("อัพโหลดหลักฐานการโอนเงิน(สลิป)")]
+                            )
+                          ])
+                        ])
+                      ])
+                    : _c("div", { staticClass: "col-lg-12" }, [
+                        _vm._v(
+                          "\n                        มีค่าบริการในการจัดส่ง\n                    "
                         )
                       ])
-                    ])
-                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-6" }, [
@@ -61629,7 +61828,21 @@ __webpack_require__.r(__webpack_exports__);
     address: '101/8 ม.2 ต.ช้างเผือก อ.เมือง จ.เชียงใหม่',
     phone: '086-4351469',
     email: 'Bossnoppadol@gmail.com',
-    storeNameTh: 'ซาลาเปาไอที'
+    storeNameTh: 'ซาลาเปาไอที',
+    paymentType: [{
+      title: 'ชำระเงินผ่านพร้อมเพย์',
+      value: '0'
+    }, {
+      title: 'ชำระเงินปลายทาง',
+      value: '1'
+    }],
+    shippingType: [{
+      title: 'เดินทางไปรับด้วยตนเอง',
+      value: '0'
+    }, {
+      title: 'ทางร้านจัดส่งให้',
+      value: '1'
+    }]
   },
   getters: {
     address: function address(state) {
@@ -61643,6 +61856,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     storeNameTh: function storeNameTh(state) {
       return state.storeNameTh;
+    },
+    paymentType: function paymentType(state) {
+      return state.paymentType;
+    },
+    shippingType: function shippingType(state) {
+      return state.shippingType;
     }
   }
 });
@@ -61672,6 +61891,9 @@ __webpack_require__.r(__webpack_exports__);
     }, {
       "class": 'text-warning',
       title: 'ทางร้านกำลังจัดทำ'
+    }, {
+      "class": 'text-warning',
+      title: 'กำลังจัดส่งซาลาเปา'
     }, {
       "class": 'text-primary',
       title: 'ถึงคิวของลูกค้าแล้ว'
