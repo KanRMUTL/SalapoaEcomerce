@@ -49,4 +49,21 @@ class Order extends Model
             ->get();
         return count($request);
     }
+
+    public function scopeSumTotal($query)
+    {
+        return $query->select(DB::raw('SUM(order_total) as total'))->get();
+    }
+
+    public function scopeSumTotalToday($query)
+    {
+        $today = date('Y-m-d');
+        return $query->select(DB::raw('SUM(order_total) as total'))->where(DB::raw('CAST(created_at AS DATE)'), '=', $today)->get();
+    }
+
+    public function scopeOrderToday($query)
+    {
+        $today = date('Y-m-d');
+        return $query->select('order_id')->where(DB::raw('CAST(created_at AS DATE)'), '=', $today)->get();
+    }
 }

@@ -50,6 +50,16 @@ class OrderController extends Controller
         }
         return response()->json($order);
     }
+    public function dashboard()
+    {
+        $data = [
+            'orderRow' => count(Order::all()),
+            'orderTotal' => Order::sumTotal()[0]->total,
+            'orderTotalToday' => Order::sumTotalToday()[0]->total,
+            'orderToday' => count(Order::orderToday())
+        ];
+        return response()->json($data);
+    }
 
     public function getOrder($orderId)
     {
