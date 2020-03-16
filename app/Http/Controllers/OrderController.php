@@ -32,10 +32,11 @@ class OrderController extends Controller
         $order->order_que = Order::getCurrentQue();
         $order->order_code = strtoupper(Str::random(5));
         $order->order_amount = $request->amount;
-        $order->order_total = $request->total;
+        $order->order_total = $request->total + $request->shipping_price;
         $order->order_remark = $request->remark;
         $order->order_payment_type = $request->payment_type;
         $order->order_shipping_type = $request->shipping_type;
+        $order->order_shipping_price = $request->shipping_price;
         $order->status_id = 0;
         $order->save();
 

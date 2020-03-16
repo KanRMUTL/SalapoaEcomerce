@@ -24,7 +24,7 @@
                     </h1>
                     <hr>
                     <h4 class="text-center mb-2">รายการสั่งซื้อ</h4>
-                    <OrderTable :orders="queSelected.sub_order" :total="queSelected.order_total" />
+                    <OrderTable :orders="queSelected.sub_order" :total="queSelected.order_total" :shippingPrice="queSelected.order_shipping_price"/>
                     <hr>
                     <p>เบอร์โทร : {{ queSelected.customer_phone }}</p>
                     <p>สั่งซื้อเมื่อ : {{ queSelected.dateformated }}</p>

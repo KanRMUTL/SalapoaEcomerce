@@ -2365,6 +2365,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     orders: {
@@ -2372,6 +2380,9 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     total: {
+      required: true
+    },
+    shippingPrice: {
       required: true
     }
   }
@@ -2708,6 +2719,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3006,6 +3018,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3020,7 +3038,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         paymentId: 0,
         shippingId: 0,
         remark: '',
-        slipFile: ''
+        slipFile: '',
+        shippingPrice: 0
       },
       paymented: false
     };
@@ -3045,6 +3064,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     switchPaymentStatus: function switchPaymentStatus() {
       this.paymented = !this.paymented;
     },
+    checkingShipping: function checkingShipping() {
+      if (this.total < 50 && this.form.shippingId == 1) {
+        this.form.shippingPrice = 15;
+      } else {
+        this.form.shippingPrice = 0;
+      }
+    },
     formSubmit: function formSubmit(e) {
       e.preventDefault();
 
@@ -3063,6 +3089,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       formData.append('total', this.total);
       formData.append('payment_type', this.form.paymentId);
       formData.append('shipping_type', this.form.shippingId);
+      formData.append('shipping_price', this.form.shippingPrice);
 
       if (this.form.paymentId == 0) {
         formData.append('slip', this.form.slipFile);
@@ -40765,6 +40792,22 @@ var render = function() {
                   ])
                 }),
                 _vm._v(" "),
+                _vm.shippingPrice > 0
+                  ? _c("tr", [
+                      _c("td", [
+                        _vm._v(
+                          "\n                                ค่าบริการจัดส่ง\n                            "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-right" }, [
+                        _vm._v(
+                          "\n                                15.00\n                            "
+                        )
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("tr", { staticClass: "text-primary" }, [
                   _vm._m(1),
                   _vm._v(" "),
@@ -41084,7 +41127,8 @@ var render = function() {
                     _c("OrderTable", {
                       attrs: {
                         orders: _vm.queSelected.sub_order,
-                        total: _vm.queSelected.order_total
+                        total: _vm.queSelected.order_total,
+                        shippingPrice: _vm.queSelected.order_shipping_price
                       }
                     }),
                     _vm._v(" "),
@@ -41358,11 +41402,13 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "info-box-content" }, [
                 _c("span", { staticClass: "info-box-text" }, [
-                  _vm._v(
-                    "ขายได้ " +
-                      _vm._s(_vm.productTotal(product.amount)) +
-                      " ชิ้น"
-                  )
+                  _vm._v(_vm._s(product.product_name) + " ชิ้น")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "info-box-text" }, [
+                  _vm._v("ขายได้ "),
+                  _c("b", [_vm._v(_vm._s(_vm.productTotal(product.amount)))]),
+                  _vm._v(" ชิ้น")
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "info-box-number" }, [
@@ -41717,23 +41763,26 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: { id: "shipping" },
                           on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.form,
-                                "shippingId",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "shippingId",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                              _vm.checkingShipping
+                            ]
                           }
                         },
                         _vm._l(_vm.shippingType, function(shipping, key) {
@@ -41837,23 +41886,28 @@ var render = function() {
                         staticClass: "form-control",
                         attrs: { id: "shipping" },
                         on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.form,
-                              "paymentId",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "paymentId",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                            function($event) {
+                              return _vm.checkingShipping()
+                            }
+                          ]
                         }
                       },
                       _vm._l(_vm.paymentType, function(payment, key) {
@@ -41916,11 +41970,21 @@ var render = function() {
                           ])
                         ])
                       ])
-                    : _c("div", { staticClass: "col-lg-12" }, [
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.total < 50 && _vm.form.shippingId == 1
+                    ? _c("div", { staticClass: "col-lg-12 text-warning" }, [
                         _vm._v(
-                          "\n                        มีค่าบริการในการจัดส่ง\n                    "
+                          "\n                        มีค่าบริการในการจัดส่ง 15 บาท\n                    "
                         )
                       ])
+                    : _vm.total > 50 && _vm.form.shippingId == 1
+                    ? _c("div", { staticClass: "col-lg-12 text-success" }, [
+                        _vm._v(
+                          "\n                        ค่าบริการจัดส่งฟรีเมื่อซื้อ 50 บาทขึ้นไป\n                    "
+                        )
+                      ])
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-6" }, [
@@ -41957,9 +42021,27 @@ var render = function() {
                             )
                           }),
                           _vm._v(" "),
+                          _vm.total < 50 && _vm.form.shippingId == 1
+                            ? _c("li", { staticClass: "fw-normal" }, [
+                                _vm._v(
+                                  "\n                                        ค่าบริการในการจัดส่ง "
+                                ),
+                                _c("span", [
+                                  _vm._v(
+                                    _vm._s(_vm.form.shippingPrice) + " บาท"
+                                  )
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
                           _c("li", { staticClass: "total-price" }, [
                             _vm._v("รวมทั้งหมด "),
-                            _c("span", [_vm._v(_vm._s(_vm.total) + " บาท")])
+                            _c("span", [
+                              _vm._v(
+                                _vm._s(_vm.total + _vm.form.shippingPrice) +
+                                  " บาท"
+                              )
+                            ])
                           ])
                         ],
                         2

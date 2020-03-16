@@ -9,7 +9,8 @@
                 </span>
 
             <div class="info-box-content">
-                <span class="info-box-text">ขายได้ {{ productTotal(product.amount) }} ชิ้น</span>
+                <span class="info-box-text">{{ product.product_name }} ชิ้น</span>
+                <span class="info-box-text">ขายได้ <b>{{ productTotal(product.amount) }}</b> ชิ้น</span>
                 <span class="info-box-number">
                     ราคารวม <b class="text-success">{{ productTotal(product.total) }} </b>บาท
                 </span>

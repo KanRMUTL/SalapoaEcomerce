@@ -13,7 +13,7 @@ class CreateProductTable extends Migration
             $table->increments('product_id');
             $table->string('product_name');
             $table->string('product_img');
-            $table->decimal('product_price');
+            $table->integer('product_price');
             $table->timestamps();
         });
     }

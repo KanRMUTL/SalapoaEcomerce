@@ -19,6 +19,7 @@ class CreateOrderTable extends Migration
             $table->decimal('order_total', 8, 2);
             $table->integer('order_payment_type');
             $table->integer('order_shipping_type');
+            $table->integer('order_shipping_price');
             $table->text('order_remark')->nullable();
             $table->text('order_address')->nullable();
             $table->string('order_slip')->nullable();

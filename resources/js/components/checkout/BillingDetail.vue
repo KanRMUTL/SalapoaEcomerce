@@ -21,7 +21,7 @@
                             </div>
                              <div class="col-lg-12 mb-2">
                                 <label for="shipping">ช่องทางการรับสินค้า</label>
-                                <select class="form-control" id="shipping" v-model="form.shippingId">
+                                <select class="form-control" id="shipping" @change="checkingShipping" v-model="form.shippingId">
                                     <option
                                         v-for="(shipping, key) in shippingType"
                                         :key="key"
@@ -44,7 +44,7 @@
                         <h4 class="fw-title">การชำระเงิน</h4>
                         <div class="col-lg-12 mb-2">
                             <label for="shipping">ช่องทางการรับสินค้า</label>
-                            <select class="form-control" id="shipping" v-model="form.paymentId">
+                            <select class="form-control" id="shipping" @change="checkingShipping()" v-model="form.paymentId">
                                 <option
                                     v-for="(payment, key) in paymentType"
                                     :key="key"
@@ -67,8 +67,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12" v-else>
-                            มีค่าบริการในการจัดส่ง
+                        <div class="col-lg-12 text-warning" v-if="total < 50 && form.shippingId == 1">
+                            มีค่าบริการในการจัดส่ง 15 บาท
+                        </div>
+                        <div class="col-lg-12 text-success" v-else-if="total > 50 && form.shippingId == 1">
+                            ค่าบริการจัดส่งฟรีเมื่อซื้อ 50 บาทขึ้นไป
                         </div>
                     </div>
 
@@ -85,7 +88,10 @@
                                         >
                                             ซาลาเปา{{ cartItem.product_name }} x {{ cartItem.sub_order_amount }} <span>{{ cartItem.sub_order_total }} บาท</span>
                                         </li>
-                                        <li class="total-price">รวมทั้งหมด <span>{{ total }} บาท</span></li>
+                                        <li class="fw-normal" v-if="total < 50 && form.shippingId == 1">
+                                            ค่าบริการในการจัดส่ง <span>{{ form.shippingPrice }} บาท</span>
+                                        </li>
+                                        <li class="total-price">รวมทั้งหมด <span>{{ total + form.shippingPrice }} บาท</span></li>
                                     </ul>
                                     <div class="order-btn select-button">
                                         <button type="submit" class="btn primary-btn checkout-btn" :disabled="!total">ยืนยันการชำระเงิน</button>
@@ -116,7 +122,8 @@ export default {
                 paymentId: 0,
                 shippingId: 0,
                 remark: '',
-                slipFile: ''
+                slipFile: '',
+                shippingPrice: 0
             },
             paymented: false,
         }
@@ -139,6 +146,13 @@ export default {
         switchPaymentStatus() {
             this.paymented = !this.paymented
         },
+        checkingShipping(){
+            if(this.total < 50 && this.form.shippingId == 1){
+                this.form.shippingPrice = 15
+            } else {
+                this.form.shippingPrice = 0
+            }
+        },
         formSubmit (e) {
             e.preventDefault();
 
@@ -155,12 +169,15 @@ export default {
             formData.append('total', this.total)
             formData.append('payment_type', this.form.paymentId)
             formData.append('shipping_type', this.form.shippingId)
+            formData.append('shipping_price', this.form.shippingPrice)
+
             if(this.form.paymentId == 0) {
                 formData.append('slip', this.form.slipFile);
             }
             if(this.form.shippingId == 1){
                 formData.append('address', this.form.address)
             }
+
             axios.post('/createOrder',
                 formData,
                 {

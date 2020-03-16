@@ -21,6 +21,14 @@
                                     {{ order.sub_order_price }}
                                 </td>
                             </tr>
+                            <tr v-if="shippingPrice > 0">
+                                <td >
+                                    ค่าบริการจัดส่ง
+                                </td>
+                                <td class="text-right">
+                                    15.00
+                                </td>
+                            </tr>
                             <tr class="text-primary">
                                 <td>
                                     <b>ราคารวม</b>
@@ -48,7 +56,10 @@ export default {
         },
         total: {
             required: true
-        }
+        },
+        shippingPrice: {
+            required: true
+        },
     }
 };
 </script>
