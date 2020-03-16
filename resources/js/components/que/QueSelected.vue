@@ -30,7 +30,7 @@
                         สั่งซื้อโดย: คุณ{{ orderSelected.order.customer_name }}
                     </p>
                     <p class="mb-1 text-left">เบอร์โทร: {{ orderSelected.order.customer_phone }}</p>
-                    <p class="mb-1 text-left">ออกบัตริคิวเมื่อ {{ orderSelected.created }}</p>
+                    <p class="mb-1 text-left">ออกบัตรคิวเมื่อ {{ orderSelected.created }}</p>
                     <p class="mb-1 text-left">สถานะ: <b :class="status[orderSelected.order.status_id].class">{{ status[orderSelected.order.status_id].title }}</b></p>
                 </div>
             </div>

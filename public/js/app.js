@@ -42928,7 +42928,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("p", { staticClass: "mb-1 text-left" }, [
                     _vm._v(
-                      "ออกบัตริคิวเมื่อ " + _vm._s(_vm.orderSelected.created)
+                      "ออกบัตรคิวเมื่อ " + _vm._s(_vm.orderSelected.created)
                     )
                   ]),
                   _vm._v(" "),
