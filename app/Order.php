@@ -43,6 +43,7 @@ class Order extends Model
         $request = $query
             ->where([
                 ['status_id', '!=', '3'],
+                ['status_id', '!=', '4'],
                 ['order_id', '!=', $this->order_id],
                 ['created_at', '<', $this->created_at]
             ])

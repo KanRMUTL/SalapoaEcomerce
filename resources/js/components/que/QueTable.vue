@@ -24,6 +24,7 @@
                                     :order="list.order"
                                     :created="list.created"
                                 />
+                                
                                 <tr v-if="orderList.length == 0">
                                     <td colspan="7">
                                         ไม่มีรายการบัตรคิว

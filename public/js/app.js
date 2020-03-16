@@ -3563,10 +3563,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     orders: {
       type: Array
+    },
+    shippingPrice: {
+      type: Boolean,
+      required: true
     }
   }
 });
@@ -3715,7 +3726,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     OrderList: _OrderList__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["orderSelected", 'status']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["orderSelected", 'status']), {
+    haveShippingPrice: function haveShippingPrice() {
+      return this.orderSelected.order.order_shipping_price > 0;
+    }
+  })
 });
 
 /***/ }),
@@ -3737,6 +3752,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -42718,7 +42734,16 @@ var render = function() {
                   _c("span", [_vm._v(_vm._s(order.sub_order_price))])
                 ]
               )
-            })
+            }),
+            _vm._v(" "),
+            _vm.shippingPrice
+              ? _c("li", { staticClass: "fw-normal text-left align-middle" }, [
+                  _vm._v(
+                    "\n                    ค่าบริการในการจัดส่ง\n                    "
+                  ),
+                  _c("span", [_vm._v("15.00")])
+                ])
+              : _vm._e()
           ],
           2
         )
@@ -42868,7 +42893,10 @@ var render = function() {
                       { staticClass: "col-lg-12" },
                       [
                         _c("OrderList", {
-                          attrs: { orders: _vm.orderSelected.order.sub_order }
+                          attrs: {
+                            orders: _vm.orderSelected.order.sub_order,
+                            shippingPrice: _vm.haveShippingPrice
+                          }
                         })
                       ],
                       1
@@ -42977,7 +43005,7 @@ var render = function() {
                     ? _c("tr", [
                         _c("td", { attrs: { colspan: "7" } }, [
                           _vm._v(
-                            "\r\n                                        ไม่มีรายการบัตรคิว\r\n                                    "
+                            "\n                                        ไม่มีรายการบัตรคิว\n                                    "
                           )
                         ])
                       ])

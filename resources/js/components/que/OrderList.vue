@@ -13,6 +13,13 @@
                         {{ order.sub_order_amount }}
                         <span>{{ order.sub_order_price }}</span>
                     </li>
+                    <li
+                        v-if="shippingPrice"
+                        class="fw-normal text-left align-middle"
+                    >
+                        ค่าบริการในการจัดส่ง
+                        <span>15.00</span>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -24,6 +31,10 @@ export default {
     props: {
         orders: {
             type: Array
+        },
+        shippingPrice:{
+            type: Boolean,
+            required: true
         }
     }
 };

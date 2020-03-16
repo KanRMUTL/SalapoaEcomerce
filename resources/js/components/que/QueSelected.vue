@@ -20,7 +20,7 @@
                     <h4 class="mb-2">รายละเอียดการสั่งซื้อ</h4>
                     <div class="row">
                         <div class="col-lg-12">
-                            <OrderList :orders="orderSelected.order.sub_order" />
+                            <OrderList :orders="orderSelected.order.sub_order" :shippingPrice="haveShippingPrice"/>
                         </div>
                     </div>
                      <h3 class="text-warning mb-3">
@@ -47,7 +47,10 @@ export default {
         OrderList
     },
     computed: {
-        ...mapGetters(["orderSelected", 'status'])
+        ...mapGetters(["orderSelected", 'status']),
+        haveShippingPrice(){
+                return this.orderSelected.order.order_shipping_price > 0;
+        }
     }
 };
 </script>
